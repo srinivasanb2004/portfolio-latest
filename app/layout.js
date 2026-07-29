@@ -2,8 +2,8 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 
 export const metadata = {
-  title: 'Srinivasan | Full Stack Developer',
-  description: 'Tech Portfolio built with Next.js',
+  title: 'Srinivasan B | Full Stack Developer',
+  description: 'Portfolio of Srinivasan B built with Next.js',
 };
 
 export default function RootLayout({ children }) {
