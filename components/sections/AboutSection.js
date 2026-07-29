@@ -14,41 +14,43 @@ export default function AboutSection() {
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
-        
+
       <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         {/* Image */}
-        <div className="flex justify-center">
-          <div className="relative w-[320px] h-[420px] md:w-[380px] md:h-[500px]">
-            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 p-[2px]">
-              <div className="w-full h-full rounded-[2rem] bg-[#0b1120]"></div>
-            </div>
+        <div className="hidden md:block">
+          <div className="flex justify-center">
+            <div className="relative w-[320px] h-[420px] md:w-[380px] md:h-[500px]">
+              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 p-[2px]">
+                <div className="w-full h-full rounded-[2rem] bg-[#0b1120]"></div>
+              </div>
 
-            <div className="relative w-full h-full p-2">
-              <Image
-                src="/techy.jpg"
-                alt="Srinivasan B"
-                fill
-                className="object-cover rounded-[1.8rem]"
-              />
+              <div className="relative w-full h-full p-2">
+                <Image
+                  src="/techy.jpg"
+                  alt="Srinivasan B"
+                  fill
+                  className="object-cover rounded-[1.8rem]"
+                />
+              </div>
             </div>
           </div>
         </div>
-        
+
 
         {/* Content */}
         <div className="space-y-8">
           <div>
             <AnimatedHeading>
-            <p className="text-cyan-300 font-semibold uppercase tracking-[0.2em]">
-              About Me
-            </p>
+              <p className="text-cyan-300 font-semibold uppercase tracking-[0.2em]">
+                About Me
+              </p>
 
-            <h1 className="text-4xl md:text-5xl font-bold mt-3">
-              Passionate <br />
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Full Stack Developer
-              </span>
-            </h1>
+              <h1 className="text-4xl md:text-5xl font-bold mt-3">
+                Passionate <br />
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  Full Stack Developer
+                </span>
+              </h1>
             </AnimatedHeading>
 
             <p className="text-gray-300 text-lg leading-8 mt-6">
@@ -130,7 +132,7 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
-      
+
     </section>
   );
 }
