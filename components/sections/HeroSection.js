@@ -51,7 +51,7 @@ export default function HeroSection() {
             </a>
 
             <a
-              href="/SRINIVASAN_B_RESUME.pdf"
+              href="/Srinivasan_Resume.pdf"
               download
               className="flex items-center gap-2 bg-white/5 border border-cyan-400/40 text-cyan-300 hover:bg-cyan-400/10 px-7 py-3 rounded-xl font-medium transition hover:scale-105 duration-300 backdrop-blur-md">
               ⬇ Download CV
