@@ -4,7 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from '@/components/Navbar';
 import ScrollProgress from '@/components/ScrollProgress';
 
-const siteUrl = 'https://your-domain.com'; // TODO: replace with your real deployed domain
+const siteUrl = 'https://portfolio-latest-mu-rose.vercel.app/'; 
 
 export const metadata = {
   metadataBase: new URL(siteUrl),

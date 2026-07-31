@@ -82,7 +82,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="/Srinivasan_B_Resume.pdf"
+            href="/SRINIVASAN_B_RESUME.pdf"
             download
             className="flex items-center gap-2 px-4 py-2 rounded-xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-200 hover:bg-cyan-400/20 hover:border-cyan-400/60 transition duration-300 text-sm font-medium">
             ⬇ CV
