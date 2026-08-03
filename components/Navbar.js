@@ -83,7 +83,7 @@ export default function Navbar() {
             ))}
 
             <a
-              href="/Srinivasan_B_Resume.pdf"
+              href="/SRINIVASAN_B_RESUME.pdf"
               download
               className="mt-2 px-4 py-3 rounded-xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-200 hover:bg-cyan-400/20 transition font-medium text-center">
               ⬇ Download CV

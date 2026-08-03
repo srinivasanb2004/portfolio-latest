@@ -16,24 +16,42 @@ import {
 
 export default function ContactSection() {
   const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
+    setLoading(true);
+    setStatus('');
+
     const formData = new FormData(e.target);
 
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message'),
-      }),
-    });
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+        }),
+      });
 
-    const data = await res.json();
-    setStatus(data.message);
-    e.target.reset();
+      const data = await res.json();
+
+      setStatus(data.message);
+
+      if (res.ok) {
+        e.target.reset();
+      }
+
+    } catch (error) {
+      setStatus('Something went wrong. Please try again.');
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -157,10 +175,13 @@ export default function ContactSection() {
 
             <button
               type="submit"
-              className="group w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white py-4 rounded-xl font-semibold transition duration-300 shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 hover:scale-[1.02]">
+              disabled={loading}
+              className="group w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white py-4 rounded-xl font-semibold transition duration-300 shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 hover:scale-[1.02] disabled:opacity-50"
+            >
               <FaPaperPlane className="group-hover:translate-x-1 transition" />
-              Send Message
+              {loading ? 'Sending...' : 'Send Message'}
             </button>
+            
           </form>
 
           {status && (

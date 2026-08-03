@@ -11,6 +11,17 @@ import {
 
 const projects = [
 
+   {
+    title: 'Student Management System',
+    description:
+      'Smart Teacher Register is a full-stack school ERP system for managing students, attendance, marks, fees, and reports with a modern Next.js dashboard',
+    tech: ['Next.js', 'Prisma', 'PostgreSQL'],
+    icon: FaServer,
+    color: 'text-cyan-400',
+    github: 'https://github.com/srinivasanb2004/smart-teacher-register.git',
+    demo: 'https://smart-teacher-register-pej4.vercel.app/',
+  },
+
   {
     title: 'Weather Forecast App',
     description:
@@ -54,17 +65,7 @@ const projects = [
     github: 'https://github.com/srinivasanb2004/UDEMY-React.git',
     demo: 'https://udemy-react-two-zeta.vercel.app/',
   },
-  {
-    title: 'GreenDen Plant your Dream!',
-    description:
-      'Plants which turns your home as garden.',
-    tech: ['Node.js', 'Express', 'Nodemailer'],
-    icon: FaServer,
-    color: 'text-cyan-400',
-    github: 'https://github.com/srinivasanb2004/Greenden-Tailwind.git',
-    demo: 'https://srinivasanb2004.github.io/Greenden-Tailwind/',
-  },
-
+ 
   {
     title: 'Personal-Portfolio Website',
     description:
@@ -75,6 +76,8 @@ const projects = [
     github: 'https://github.com/srinivasanb2004/MY-PROFILE-PAGE.git',
     demo: 'https://srinivasanb2004.github.io/MY-PROFILE-PAGE/',
   },
+
+
 ];
 
 export default function ProjectsSection() {
