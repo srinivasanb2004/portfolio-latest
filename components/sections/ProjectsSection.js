@@ -12,18 +12,29 @@ import {
 
 const projects = [
 
+   {
+    title: 'Full Stack School Management Application',
+    description:
+      'A full-stack school management application for teachers to manage attendance, students, marks, fees, reports, and academic records with a paper-register inspired interface.',
+    tech: ['Next.js 15', 'React', 'TypeScript', 'Tailwind CSS', 'Prisma', 'PostgreSQL', 'JWT Auth', 'Vercel'],
+    icon: FaDatabase,
+    color: 'text-green-400',
+    github: 'https://github.com/srinivasanb2004/smart-teacher-register.git',
+    demo: 'https://smart-teacher-register-pej4.vercel.app/',
+  },
+
   {
     title: 'Weather Forecast App',
     description:
       'Responsive weather application with live API data, search, humidity, and forecast details.',
-    tech: ['React', 'Weather API', 'CSS','Javascript'],
+    tech: ['React', 'Weather API', 'CSS', 'Javascript'],
     icon: FaCode,
     color: 'text-blue-400',
     github: 'https://github.com/srinivasanb2004/Weather-App.git',
     demo: 'https://weather-app-two-pi-85.vercel.app/',
   },
 
-   {
+  {
     title: 'TRIP ADVISOR CLONE',
     description:
       'A responsive travel discovery web app inspired by TripAdvisor.',
@@ -34,27 +45,17 @@ const projects = [
     demo: 'https://srinivasanb2004.github.io/TRIPADVISOR-CLONE/',
   },
 
-   {
+  {
     title: 'NOSTRA-E-COMMERCE',
     description:
       'A responsive e-commerce clothing app for browsing, searching, and shopping fashion products online.',
-    tech: ['React', 'Next.js','Javascript', 'MongoDB'],
+    tech: ['React', 'Next.js', 'Javascript', 'MongoDB'],
     icon: FaCode,
     color: 'text-yellow-400',
     github: 'https://github.com/srinivasanb2004/NOSTRA-E-COMMERCE.git',
     demo: 'https://srinivasanb2004.github.io/NOSTRA-E-COMMERCE/',
   },
 
-  {
-    title: 'UDEMY CLONE- Land your dream career with us!',
-    description:
-      'A responsive online learning platform for browsing, searching, and watching courses similar to Udemy.',
-    tech: ['React', 'Node.js', 'MongoDB'],
-    icon: FaDatabase,
-    color: 'text-green-400',
-    github: 'https://github.com/srinivasanb2004/UDEMY-React.git',
-    demo: 'https://udemy-react-two-zeta.vercel.app/',
-  },
   {
     title: 'GreenDen Plant your Dream!',
     description:
@@ -121,56 +122,56 @@ export default function ProjectsSection() {
 
             return (
               <Reveal key={project.title} delay={(index % 3) * 0.1} y={24}>
-              <div
-                className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md hover:border-cyan-400/40 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10 transition duration-300 flex flex-col h-full">
-                {/* Icon Area */}
-                <div className="relative h-44 bg-gradient-to-br from-[#111827] to-[#1e293b] flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#22d3ee,transparent_60%)]"></div>
+                <div
+                  className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md hover:border-cyan-400/40 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10 transition duration-300 flex flex-col h-full">
+                  {/* Icon Area */}
+                  <div className="relative h-44 bg-gradient-to-br from-[#111827] to-[#1e293b] flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#22d3ee,transparent_60%)]"></div>
 
-                  <Icon
-                    className={`text-6xl ${project.color} group-hover:scale-110 transition duration-300`}
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="p-6 flex flex-col gap-4 flex-1">
-                  <h3 className="text-2xl font-bold text-white">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-gray-400 leading-7 flex-1">
-                    {project.description}
-                  </p>
-
-                  {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 rounded-full bg-[#111827] border border-cyan-400/20 text-xs text-cyan-300">
-                        {tech}
-                      </span>
-                    ))}
+                    <Icon
+                      className={`text-6xl ${project.color} group-hover:scale-110 transition duration-300`}
+                    />
                   </div>
 
-                  {/* Buttons */}
-                  <div className="flex gap-3 pt-2">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-white/10 bg-white/5 hover:border-cyan-400/40 hover:bg-cyan-400/10 transition text-sm font-medium">
-                      <FaGithub /> GitHub
-                    </a>
+                  {/* Content */}
+                  <div className="p-6 flex flex-col gap-4 flex-1">
+                    <h3 className="text-2xl font-bold text-white">
+                      {project.title}
+                    </h3>
 
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition text-sm font-medium text-white shadow-lg shadow-cyan-500/20">
-                      <FaExternalLinkAlt /> Demo
-                    </a>
+                    <p className="text-gray-400 leading-7 flex-1">
+                      {project.description}
+                    </p>
+
+                    {/* Tech Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 rounded-full bg-[#111827] border border-cyan-400/20 text-xs text-cyan-300">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="flex gap-3 pt-2">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-white/10 bg-white/5 hover:border-cyan-400/40 hover:bg-cyan-400/10 transition text-sm font-medium">
+                        <FaGithub /> GitHub
+                      </a>
+
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition text-sm font-medium text-white shadow-lg shadow-cyan-500/20">
+                        <FaExternalLinkAlt /> Demo
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
               </Reveal>
             );
           })}
