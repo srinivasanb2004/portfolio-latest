@@ -23,6 +23,29 @@ const projects = [
     demo: 'https://smart-teacher-register-pej4.vercel.app/',
   },
 
+  
+   {
+    title: 'NOSTRA-Mens Clothing E-Commerce App',
+    description:
+      'A responsive e-commerce clothing app for browsing, searching, and shopping fashion products online.',
+    tech: ['React', 'Next.js', 'TypeScript', 'Auth.js','Prisma','TypeScript'],
+    icon: FaCode,
+    color: 'text-yellow-400',
+    github: 'https://github.com/srinivasanb2004/NOSTRA-ECOMMERCE-NEXT-JS.git',
+    demo: 'https://nostra-mens-clothing.vercel.app/',
+  },
+
+   {
+    title: 'AI-Powered Expense Tracker',
+    description:
+      'A smart expense tracking application powered by AI for automated categorization and insights.',
+    tech: ['Next.js', 'Tailwind CSS','PostgreSQL', 'Supabase', 'Prisma','OCR', 'OpenAI API'],
+    icon: FaCode,
+    color: 'text-pink-400',
+    github: 'https://ai-expense-tracker-sage-seven.vercel.app/',
+    demo: 'https://srinivasanb2004.github.io/MY-PROFILE-PAGE/',
+  },
+
   {
     title: 'Weather Forecast App',
     description:
@@ -33,6 +56,7 @@ const projects = [
     github: 'https://github.com/srinivasanb2004/Weather-App.git',
     demo: 'https://weather-app-two-pi-85.vercel.app/',
   },
+
 
   {
     title: 'TRIP ADVISOR CLONE',
@@ -45,16 +69,7 @@ const projects = [
     demo: 'https://srinivasanb2004.github.io/TRIPADVISOR-CLONE/',
   },
 
-  {
-    title: 'NOSTRA-E-COMMERCE',
-    description:
-      'A responsive e-commerce clothing app for browsing, searching, and shopping fashion products online.',
-    tech: ['React', 'Next.js', 'Javascript', 'MongoDB'],
-    icon: FaCode,
-    color: 'text-yellow-400',
-    github: 'https://github.com/srinivasanb2004/NOSTRA-E-COMMERCE.git',
-    demo: 'https://srinivasanb2004.github.io/NOSTRA-E-COMMERCE/',
-  },
+ 
 
   {
     title: 'GreenDen Plant your Dream!',
@@ -67,16 +82,7 @@ const projects = [
     demo: 'https://srinivasanb2004.github.io/Greenden-Tailwind/',
   },
 
-  {
-    title: 'Personal-Portfolio Website',
-    description:
-      'Personal developer portfolio built with Next.js, Tailwind CSS, and responsive animations.',
-    tech: ['Next.js', 'Tailwind CSS', 'Javascript'],
-    icon: FaCode,
-    color: 'text-pink-400',
-    github: 'https://github.com/srinivasanb2004/MY-PROFILE-PAGE.git',
-    demo: 'https://srinivasanb2004.github.io/MY-PROFILE-PAGE/',
-  },
+ 
 ];
 
 export default function ProjectsSection() {
