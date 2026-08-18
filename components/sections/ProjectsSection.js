@@ -25,7 +25,7 @@ const projects = [
 
   
    {
-    title: 'NOSTRA-Mens Clothing E-Commerce App',
+    title: 'NOSTRA-Mens Clothing E-Comm App',
     description:
       'A responsive e-commerce clothing app for browsing, searching, and shopping fashion products online.',
     tech: ['React', 'Next.js', 'TypeScript', 'Auth.js','Prisma','TypeScript'],
@@ -42,8 +42,8 @@ const projects = [
     tech: ['Next.js', 'Tailwind CSS','PostgreSQL', 'Supabase', 'Prisma','OCR', 'OpenAI API'],
     icon: FaCode,
     color: 'text-pink-400',
-    github: 'https://ai-expense-tracker-sage-seven.vercel.app/',
-    demo: 'https://srinivasanb2004.github.io/MY-PROFILE-PAGE/',
+    github: 'https://github.com/srinivasanb2004/ai-expense-tracker.git',
+    demo: 'https://ai-expense-tracker-sage-seven.vercel.app/',
   },
 
   {
