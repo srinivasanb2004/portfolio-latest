@@ -28,7 +28,7 @@ const projects = [
     title: 'NOSTRA-Mens Clothing E-Comm App',
     description:
       'A responsive e-commerce clothing app for browsing, searching, and shopping fashion products online.',
-    tech: ['React', 'Next.js', 'TypeScript', 'Auth.js','Prisma','TypeScript'],
+    tech: ['React', 'Next.js', 'TypeScript', 'Auth.js', 'Prisma'],
     icon: FaCode,
     color: 'text-yellow-400',
     github: 'https://github.com/srinivasanb2004/NOSTRA-ECOMMERCE-NEXT-JS.git',

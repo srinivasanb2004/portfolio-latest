@@ -4,12 +4,15 @@ import SkillsSection from '@/components/sections/SkillsSection';
 import ExperienceSection from '@/components/sections/ExperienceSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import ContactSection from '@/components/sections/ContactSection';
+import InteractiveBackground from '@/components/InteractiveBackground';
+import PortfolioChatbot from '@/components/PortfolioChatbot';
 
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="bg-[#050816] text-white">
+    <main className="relative isolate bg-[#050816] text-white">
+      <InteractiveBackground />
       <section id="home">
         <HeroSection />
       </section>
@@ -35,6 +38,7 @@ export default function Home() {
       </section>
 
       <Footer/>
+      <PortfolioChatbot />
     </main>
   );
 }
