@@ -41,12 +41,118 @@ html {
 .animation-delay-2000 { animation-delay: 2s; }
 .animation-delay-4000 { animation-delay: 4s; }
 
+/* Skills technology ticker */
+.skills-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.skills-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: skills-marquee-scroll 32s linear infinite;
+}
+
+.skills-marquee:hover .skills-marquee__track {
+  animation-play-state: paused;
+}
+
+.skills-marquee__group {
+  display: flex;
+  align-items: center;
+  gap: 3.25rem;
+  padding-right: 3.25rem;
+}
+
+.skills-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: rgb(148 163 184);
+  font-size: 1.05rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@keyframes skills-marquee-scroll {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-marquee__track { animation: none; }
+  .portfolio-ai-launcher { animation: none; }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-12px); }
 }
 .animate-float {
   animation: float 5s ease-in-out infinite;
+}
+
+/* Portfolio AI launcher: a small, unobtrusive floating control. */
+@keyframes portfolio-ai-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(2deg); }
+}
+
+@keyframes portfolio-ai-pulse {
+  0%, 100% { box-shadow: 0 12px 30px rgba(8, 145, 178, 0.28), 0 0 0 0 rgba(34, 211, 238, 0.2); }
+  50% { box-shadow: 0 16px 34px rgba(8, 145, 178, 0.36), 0 0 0 9px rgba(34, 211, 238, 0); }
+}
+
+.portfolio-ai-launcher {
+  position: relative;
+  animation: portfolio-ai-float 3.6s ease-in-out infinite, portfolio-ai-pulse 3.6s ease-in-out infinite;
+}
+
+@keyframes portfolio-ai-greeting {
+  0%, 100% { opacity: 0.72; transform: translateY(2px); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
+.portfolio-ai-greeting {
+  position: absolute;
+  right: -0.4rem;
+  bottom: calc(100% + 0.7rem);
+  z-index: 1;
+  border: 1px solid rgba(103, 232, 249, 0.35);
+  border-radius: 999px;
+  background: rgba(10, 25, 49, 0.96);
+  box-shadow: 0 8px 24px rgba(8, 145, 178, 0.25);
+  color: rgb(207 250 254);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.55rem 0.7rem;
+  pointer-events: none;
+  white-space: nowrap;
+  animation: portfolio-ai-greeting 2.6s ease-in-out infinite;
+}
+
+.portfolio-ai-greeting::after {
+  position: absolute;
+  right: 1.25rem;
+  top: 100%;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: rgba(10, 25, 49, 0.96);
+  border-bottom: 1px solid rgba(103, 232, 249, 0.35);
+  border-right: 1px solid rgba(103, 232, 249, 0.35);
+  content: '';
+  transform: translateY(-0.28rem) rotate(45deg);
+}
+
+.portfolio-ai-launcher:hover,
+.portfolio-ai-launcher:focus-visible {
+  animation-play-state: paused;
+  transform: translateY(-7px) scale(1.08);
+}
+
+.portfolio-ai-launcher:hover .portfolio-ai-launcher__icon,
+.portfolio-ai-launcher:focus-visible .portfolio-ai-launcher__icon {
+  transform: rotate(-8deg);
 }
 
 /* ===== Fade / Slide entrance animations ===== */

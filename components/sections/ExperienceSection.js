@@ -45,7 +45,7 @@ const certifications = [
 
 export default function ExperienceSection() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a0f1f] via-[#111827] to-[#050816] text-white px-6 py-20 flex items-center">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a0f1f] via-[#111827] to-[#050816] text-white px-6 pb-20 pt-12 flex items-center">
       {/* Background Effects */}
       <div className="absolute -top-32 -left-32 w-[420px] h-[420px] bg-purple-500/20 rounded-full blur-[120px] animate-pulse"></div>
       <div className="absolute bottom-[-120px] right-1/3 w-[380px] h-[380px] bg-cyan-500/20 rounded-full blur-[120px] animate-pulse"></div>
