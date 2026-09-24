@@ -81,8 +81,11 @@ export default function InteractiveBackground() {
             Math.hypot(a.x - pointer.x, a.y - pointer.y),
             Math.hypot(b.x - pointer.x, b.y - pointer.y),
           );
-          const cursorBoost = cursorDistance < CURSOR_DISTANCE ? 0.25 : 0;
-          const alpha = (1 - distance / CONNECTION_DISTANCE) * (0.12 + cursorBoost);
+          // Keep the background calm until the cursor enters the particle field.
+          // Nearby particles then form a small, responsive network around it.
+          if (cursorDistance >= CURSOR_DISTANCE) continue;
+          const cursorStrength = 1 - cursorDistance / CURSOR_DISTANCE;
+          const alpha = (1 - distance / CONNECTION_DISTANCE) * (0.08 + cursorStrength * 0.35);
 
           context.beginPath();
           context.moveTo(a.x, a.y);
