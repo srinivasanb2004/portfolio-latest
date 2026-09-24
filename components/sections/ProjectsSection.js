@@ -1,6 +1,7 @@
+'use client';
+
 import AnimatedHeading from '@/components/AnimatedHeading';
-import Reveal from '@/components/Reveal';
-import { BsJavascript } from 'react-icons/bs';
+import { motion, useReducedMotion } from 'framer-motion';
 
 import {
   FaGithub,
@@ -86,8 +87,10 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a0f1f] via-[#111827] to-[#050816] text-white px-6 py-20 flex items-center">
+    <section className="relative min-h-screen bg-gradient-to-br from-[#0a0f1f] via-[#111827] to-[#050816] text-white px-6 py-20 flex items-center">
       {/* Background Effects */}
       <div className="absolute -top-32 -left-32 w-[420px] h-[420px] bg-cyan-500/20 rounded-full blur-[120px] animate-pulse"></div>
       <div className="absolute top-20 right-[-120px] w-[420px] h-[420px] bg-purple-500/20 rounded-full blur-[120px] animate-pulse"></div>
@@ -121,27 +124,46 @@ export default function ProjectsSection() {
 
 
 
-        {/* Project Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Project stack: cards flow normally on small screens and layer as the
+            visitor scrolls on desktop. */}
+        <div className="max-w-6xl mx-auto space-y-6 lg:space-y-20">
           {projects.map((project, index) => {
             const Icon = project.icon;
 
             return (
-              <Reveal key={project.title} delay={(index % 3) * 0.1} y={24}>
-                <div
-                  className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md hover:border-cyan-400/40 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10 transition duration-300 flex flex-col h-full">
+              <motion.article
+                key={project.title}
+                style={{ '--stack-offset': `${6 + index * 2.2}rem`, zIndex: index + 1 }}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                className="group relative lg:sticky lg:top-[var(--stack-offset)] motion-reduce:lg:relative motion-reduce:lg:top-auto overflow-hidden rounded-3xl border border-white/10 bg-[#111827]/95 backdrop-blur-md hover:border-cyan-400/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition duration-300 flex flex-col lg:min-h-[25rem] lg:flex-row"
+                whileHover={prefersReducedMotion ? undefined : { y: -4 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}>
                   {/* Icon Area */}
-                  <div className="relative h-44 bg-gradient-to-br from-[#111827] to-[#1e293b] flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#22d3ee,transparent_60%)]"></div>
-
-                    <Icon
-                      className={`text-6xl ${project.color} group-hover:scale-110 transition duration-300`}
-                    />
+                  <div className="relative h-44 shrink-0 bg-gradient-to-br from-[#111827] to-[#1e293b] flex items-center justify-center overflow-hidden lg:h-auto lg:w-[44%]">
+                    <div className="absolute inset-3 overflow-hidden rounded-2xl border border-white/10 bg-[#0b1120] shadow-2xl shadow-black/30">
+                      <iframe
+                        src={project.demo}
+                        title={`${project.title} live preview`}
+                        loading="lazy"
+                        tabIndex="-1"
+                        className="pointer-events-none h-[270%] w-[270%] origin-top-left scale-[0.37] border-0"
+                      />
+                    </div>
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1120]/45 via-transparent to-cyan-400/5" />
+                    <div className="absolute bottom-6 right-6 grid h-14 w-14 place-items-center rounded-2xl border border-white/10 bg-[#0b1120]/80 backdrop-blur-sm">
+                      <Icon className={`text-3xl ${project.color} group-hover:scale-110 transition duration-300`} />
+                    </div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex flex-col gap-4 flex-1">
-                    <h3 className="text-2xl font-bold text-white">
+                  <div className="flex flex-1 flex-col gap-4 p-6 lg:p-9">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+                      {String(index + 1).padStart(2, '0')} / Featured Project
+                    </p>
+
+                    <h3 className="text-2xl font-bold text-white lg:text-3xl">
                       {project.title}
                     </h3>
 
@@ -177,8 +199,7 @@ export default function ProjectsSection() {
                       </a>
                     </div>
                   </div>
-                </div>
-              </Reveal>
+              </motion.article>
             );
           })}
         </div>
