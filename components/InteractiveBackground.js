@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 
-const PARTICLE_COUNT = 72;
-const CONNECTION_DISTANCE = 145;
-const CURSOR_DISTANCE = 190;
+const PARTICLE_COUNT = 80;
+const CONNECTION_DISTANCE = 120;
+const CURSOR_DISTANCE = 150;
 
 export default function InteractiveBackground() {
   const canvasRef = useRef(null);
@@ -23,9 +23,9 @@ export default function InteractiveBackground() {
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.28,
-        vy: (Math.random() - 0.5) * 0.28,
-        radius: Math.random() * 1.35 + 0.45,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        radius: Math.random() * 0.85 + 0.5,
         hue: Math.random() > 0.72 ? 274 : 190,
       };
     }
@@ -39,7 +39,7 @@ export default function InteractiveBackground() {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      particles = Array.from({ length: width < 640 ? 34 : PARTICLE_COUNT }, createParticle);
+      particles = Array.from({ length: width < 640 ? 38 : PARTICLE_COUNT }, createParticle);
     }
 
     function draw() {
@@ -52,8 +52,8 @@ export default function InteractiveBackground() {
 
         if (!reducedMotion.matches && distance < CURSOR_DISTANCE) {
           const force = (CURSOR_DISTANCE - distance) / CURSOR_DISTANCE;
-          particle.vx += (dx / (distance || 1)) * force * 0.045;
-          particle.vy += (dy / (distance || 1)) * force * 0.045;
+          particle.vx += (dx / (distance || 1)) * force * 0.018;
+          particle.vy += (dy / (distance || 1)) * force * 0.018;
         }
 
         particle.vx *= 0.992;
@@ -66,9 +66,11 @@ export default function InteractiveBackground() {
 
         context.beginPath();
         context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        context.fillStyle = `hsla(${particle.hue}, 92%, 70%, 0.54)`;
+        context.fillStyle = `hsla(${particle.hue}, 98%, 76%, 0.9)`;
         context.fill();
       });
+
+      const pointerIsOnPage = pointer.x >= 0 && pointer.y >= 0;
 
       for (let first = 0; first < particles.length; first += 1) {
         for (let second = first + 1; second < particles.length; second += 1) {
@@ -81,24 +83,52 @@ export default function InteractiveBackground() {
             Math.hypot(a.x - pointer.x, a.y - pointer.y),
             Math.hypot(b.x - pointer.x, b.y - pointer.y),
           );
-          // Keep the background calm until the cursor enters the particle field.
-          // Nearby particles then form a small, responsive network around it.
-          if (cursorDistance >= CURSOR_DISTANCE) continue;
+          // No links on page load. Hovering activates a generous connection field
+          // so the network is always clearly visible around the cursor.
+          if (!pointerIsOnPage || cursorDistance >= CURSOR_DISTANCE) continue;
           const cursorStrength = 1 - cursorDistance / CURSOR_DISTANCE;
-          const alpha = (1 - distance / CONNECTION_DISTANCE) * (0.08 + cursorStrength * 0.35);
+          const alpha = (1 - distance / CONNECTION_DISTANCE) * (0.08 + cursorStrength * 0.22);
 
           context.beginPath();
           context.moveTo(a.x, a.y);
           context.lineTo(b.x, b.y);
           context.strokeStyle = `rgba(86, 209, 255, ${alpha})`;
-          context.lineWidth = 0.6;
+          context.lineWidth = 0.55;
           context.stroke();
         }
       }
 
+      if (pointerIsOnPage) {
+        // Only the closest dots join the cursor. This avoids long spokes across
+        // the page and keeps the hover interaction as a compact particle mesh.
+        const closestParticles = particles
+          .map((particle) => ({
+            particle,
+            distance: Math.hypot(particle.x - pointer.x, particle.y - pointer.y),
+          }))
+          .filter(({ distance }) => distance < CURSOR_DISTANCE)
+          .sort((a, b) => a.distance - b.distance)
+          .slice(0, 3);
+
+        closestParticles.forEach(({ particle, distance }) => {
+          const alpha = (1 - distance / CURSOR_DISTANCE) * 0.32;
+          context.beginPath();
+          context.moveTo(pointer.x, pointer.y);
+          context.lineTo(particle.x, particle.y);
+          context.strokeStyle = `rgba(56, 211, 255, ${alpha})`;
+          context.lineWidth = 0.7;
+          context.stroke();
+        });
+
+        context.beginPath();
+        context.arc(pointer.x, pointer.y, 1.2, 0, Math.PI * 2);
+        context.fillStyle = 'rgba(103, 232, 249, 0.8)';
+        context.fill();
+      }
+
       if (pointer.x > 0) {
         const glow = context.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, CURSOR_DISTANCE);
-        glow.addColorStop(0, 'rgba(34, 211, 238, 0.055)');
+        glow.addColorStop(0, 'rgba(34, 211, 238, 0.06)');
         glow.addColorStop(1, 'rgba(34, 211, 238, 0)');
         context.fillStyle = glow;
         context.beginPath();
@@ -132,5 +162,5 @@ export default function InteractiveBackground() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[1]" aria-hidden="true" />;
+  return <canvas id="neural" ref={canvasRef} className="pointer-events-none fixed inset-0 z-[1]" aria-hidden="true" />;
 }

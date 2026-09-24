@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from '@/components/Navbar';
 import ScrollProgress from '@/components/ScrollProgress';
+import InteractiveBackground from '@/components/InteractiveBackground';
 
 const siteUrl = 'https://portfolio-latest-mu-rose.vercel.app/'; 
 
@@ -87,6 +88,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="bg-[#050816] text-white">
+        <InteractiveBackground />
         <ScrollProgress />
         <Navbar />
         {children}
