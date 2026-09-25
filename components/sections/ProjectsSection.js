@@ -86,6 +86,10 @@ const projects = [
  
 ];
 
+function getDemoScreenshotUrl(demoUrl) {
+  return `https://image.thum.io/get/width/1200/crop/760/noanimate/${demoUrl}`;
+}
+
 export default function ProjectsSection() {
   const prefersReducedMotion = useReducedMotion();
 
@@ -143,12 +147,13 @@ export default function ProjectsSection() {
                   {/* Icon Area */}
                   <div className="relative h-44 shrink-0 bg-gradient-to-br from-[#111827] to-[#1e293b] flex items-center justify-center overflow-hidden lg:h-auto lg:w-[44%]">
                     <div className="absolute inset-3 overflow-hidden rounded-2xl border border-white/10 bg-[#0b1120] shadow-2xl shadow-black/30">
-                      <iframe
-                        src={project.demo}
-                        title={`${project.title} live preview`}
+                      <img
+                        src={getDemoScreenshotUrl(project.demo)}
+                        alt={`${project.title} demo preview`}
                         loading="lazy"
-                        tabIndex="-1"
-                        className="pointer-events-none h-[270%] w-[270%] origin-top-left scale-[0.37] border-0"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
                       />
                     </div>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1120]/45 via-transparent to-cyan-400/5" />
