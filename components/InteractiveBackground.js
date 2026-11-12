@@ -1,166 +1,117 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Pause, Play } from 'lucide-react';
 
-const PARTICLE_COUNT = 80;
-const CONNECTION_DISTANCE = 120;
-const CURSOR_DISTANCE = 150;
-
+/** One viewport-sized film-dust layer, shared by all six section scenes. */
 export default function InteractiveBackground() {
   const canvasRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      try { setPaused(localStorage.getItem('portfolio-motion-paused') === 'true'); } catch {}
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const pointer = { x: -1000, y: -1000 };
-    let particles = [];
-    let frameId;
+    if (!context) return;
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sections = [...document.querySelectorAll('.cinematic-section')];
+    const visible = new Set();
+    let frame = 0;
+    let previous = 0;
     let width = 0;
     let height = 0;
-
-    function createParticle() {
-      return {
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.18,
-        vy: (Math.random() - 0.5) * 0.18,
-        radius: Math.random() * 0.85 + 0.5,
-        hue: Math.random() > 0.72 ? 274 : 190,
-      };
-    }
+    let dust = [];
+    const pointer = { x: 0, y: 0 };
+    let dustColor = document.body.classList.contains('light-theme') ? '132,104,55' : '225,204,161';
+    const themeObserver = new MutationObserver(() => { dustColor = document.body.classList.contains('light-theme') ? '132,104,55' : '225,204,161'; });
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      entry.target.classList.toggle('scene-visible', entry.isIntersecting);
+      if (entry.isIntersecting) visible.add(entry.target);
+      else visible.delete(entry.target);
+    }), { rootMargin: '0px' });
+    sections.forEach(section => observer.observe(section));
 
     function resize() {
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
       width = window.innerWidth;
       height = window.innerHeight;
+      const ratio = Math.min(window.devicePixelRatio || 1, width < 768 ? 1 : 1.5);
       canvas.width = width * ratio;
       canvas.height = height * ratio;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      particles = Array.from({ length: width < 640 ? 38 : PARTICLE_COUNT }, createParticle);
+      dust = Array.from({ length: width < 768 ? 12 : 32 }, () => ({
+        x: Math.random() * width, y: Math.random() * height,
+        radius: Math.random() * 1.3 + 0.3, speed: Math.random() * 0.18 + 0.08,
+        phase: Math.random() * Math.PI * 2,
+      }));
     }
-
-    function draw() {
+    function draw(now) {
+      frame = requestAnimationFrame(draw);
+      if (now - previous < (width < 768 ? 50 : 33)) return;
+      const delta = Math.min((now - previous) / 16.67, 3);
+      previous = now;
       context.clearRect(0, 0, width, height);
-
-      particles.forEach((particle) => {
-        const dx = particle.x - pointer.x;
-        const dy = particle.y - pointer.y;
-        const distance = Math.hypot(dx, dy);
-
-        if (!reducedMotion.matches && distance < CURSOR_DISTANCE) {
-          const force = (CURSOR_DISTANCE - distance) / CURSOR_DISTANCE;
-          particle.vx += (dx / (distance || 1)) * force * 0.018;
-          particle.vy += (dy / (distance || 1)) * force * 0.018;
-        }
-
-        particle.vx *= 0.992;
-        particle.vy *= 0.992;
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        if (particle.x < -12 || particle.x > width + 12) particle.vx *= -1;
-        if (particle.y < -12 || particle.y > height + 12) particle.vy *= -1;
-
+      dust.forEach(dot => {
+        dot.y -= dot.speed * delta;
+        dot.x += Math.sin(now / 6000 + dot.phase) * 0.12 * delta;
+        if (dot.y < -5) dot.y = height + 5;
+        if (dot.x < -5) dot.x = width + 5;
+        if (dot.x > width + 5) dot.x = -5;
         context.beginPath();
-        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        context.fillStyle = `hsla(${particle.hue}, 98%, 76%, 0.9)`;
+        context.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+        context.fillStyle = `rgba(${dustColor},${0.08 + (Math.sin(now / 2500 + dot.phase) + 1) * 0.08})`;
         context.fill();
       });
-
-      const pointerIsOnPage = pointer.x >= 0 && pointer.y >= 0;
-
-      for (let first = 0; first < particles.length; first += 1) {
-        for (let second = first + 1; second < particles.length; second += 1) {
-          const a = particles[first];
-          const b = particles[second];
-          const distance = Math.hypot(a.x - b.x, a.y - b.y);
-          if (distance > CONNECTION_DISTANCE) continue;
-
-          const cursorDistance = Math.min(
-            Math.hypot(a.x - pointer.x, a.y - pointer.y),
-            Math.hypot(b.x - pointer.x, b.y - pointer.y),
-          );
-          // No links on page load. Hovering activates a generous connection field
-          // so the network is always clearly visible around the cursor.
-          if (!pointerIsOnPage || cursorDistance >= CURSOR_DISTANCE) continue;
-          const cursorStrength = 1 - cursorDistance / CURSOR_DISTANCE;
-          const alpha = (1 - distance / CONNECTION_DISTANCE) * (0.08 + cursorStrength * 0.22);
-
-          context.beginPath();
-          context.moveTo(a.x, a.y);
-          context.lineTo(b.x, b.y);
-          context.strokeStyle = `rgba(86, 209, 255, ${alpha})`;
-          context.lineWidth = 0.55;
-          context.stroke();
-        }
-      }
-
-      if (pointerIsOnPage) {
-        // Only the closest dots join the cursor. This avoids long spokes across
-        // the page and keeps the hover interaction as a compact particle mesh.
-        const closestParticles = particles
-          .map((particle) => ({
-            particle,
-            distance: Math.hypot(particle.x - pointer.x, particle.y - pointer.y),
-          }))
-          .filter(({ distance }) => distance < CURSOR_DISTANCE)
-          .sort((a, b) => a.distance - b.distance)
-          .slice(0, 3);
-
-        closestParticles.forEach(({ particle, distance }) => {
-          const alpha = (1 - distance / CURSOR_DISTANCE) * 0.32;
-          context.beginPath();
-          context.moveTo(pointer.x, pointer.y);
-          context.lineTo(particle.x, particle.y);
-          context.strokeStyle = `rgba(56, 211, 255, ${alpha})`;
-          context.lineWidth = 0.7;
-          context.stroke();
-        });
-
-        context.beginPath();
-        context.arc(pointer.x, pointer.y, 1.2, 0, Math.PI * 2);
-        context.fillStyle = 'rgba(103, 232, 249, 0.8)';
-        context.fill();
-      }
-
-      if (pointer.x > 0) {
-        const glow = context.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, CURSOR_DISTANCE);
-        glow.addColorStop(0, 'rgba(34, 211, 238, 0.06)');
-        glow.addColorStop(1, 'rgba(34, 211, 238, 0)');
-        context.fillStyle = glow;
-        context.beginPath();
-        context.arc(pointer.x, pointer.y, CURSOR_DISTANCE, 0, Math.PI * 2);
-        context.fill();
-      }
-
-      frameId = window.requestAnimationFrame(draw);
+      visible.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const shift = Math.max(-100, Math.min(100, (height / 2 - rect.top - rect.height / 2) * 0.09));
+        section.style.setProperty('--scene-shift', `${shift}px`);
+        section.style.setProperty('--pointer-x', `${pointer.x}px`);
+        section.style.setProperty('--pointer-y', `${pointer.y}px`);
+      });
     }
-
-    const handlePointerMove = (event) => {
-      pointer.x = event.clientX;
-      pointer.y = event.clientY;
-    };
-    const handlePointerLeave = () => {
-      pointer.x = -1000;
-      pointer.y = -1000;
-    };
-
+    function sync() {
+      cancelAnimationFrame(frame);
+      setReduced(media.matches);
+      const stopped = paused || media.matches || document.hidden;
+      document.documentElement.dataset.motionPaused = String(stopped);
+      if (stopped) context.clearRect(0, 0, width, height);
+      else { previous = performance.now(); frame = requestAnimationFrame(draw); }
+    }
+    function move(event) {
+      if (event.pointerType !== 'mouse') return;
+      pointer.x = (event.clientX / width - 0.5) * 35;
+      pointer.y = (event.clientY / height - 0.5) * 25;
+    }
     resize();
+    sync();
     window.addEventListener('resize', resize);
-    window.addEventListener('pointermove', handlePointerMove, { passive: true });
-    document.addEventListener('pointerleave', handlePointerLeave);
-    frameId = window.requestAnimationFrame(draw);
-
+    window.addEventListener('pointermove', move, { passive: true });
+    media.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
     return () => {
-      window.cancelAnimationFrame(frameId);
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      themeObserver.disconnect();
       window.removeEventListener('resize', resize);
-      window.removeEventListener('pointermove', handlePointerMove);
-      document.removeEventListener('pointerleave', handlePointerLeave);
+      window.removeEventListener('pointermove', move);
+      media.removeEventListener('change', sync);
+      document.removeEventListener('visibilitychange', sync);
+      delete document.documentElement.dataset.motionPaused;
     };
-  }, []);
+  }, [paused]);
 
-  return <canvas id="neural" ref={canvasRef} className="pointer-events-none fixed inset-0 z-[1]" aria-hidden="true" />;
+  return <>
+    <canvas ref={canvasRef} className="cinematic-dust" aria-hidden="true" />
+    <button type="button" className="motion-control" disabled={reduced} onClick={() => { const next = !paused; setPaused(next); try { localStorage.setItem('portfolio-motion-paused', String(next)); } catch {} }} aria-pressed={paused || reduced} aria-label={reduced ? 'Animations disabled by your reduced motion preference' : paused ? 'Resume animations' : 'Pause animations'}>
+      {paused && !reduced ? <Play size={12} /> : <Pause size={12} />} <span>{reduced ? 'Reduced motion' : paused ? 'Resume motion' : 'Pause motion'}</span>
+    </button>
+  </>;
 }

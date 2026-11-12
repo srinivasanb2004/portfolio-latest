@@ -1,0 +1,21 @@
+const titles = ['INTERFACE COMPOSITOR', 'COMPUTE ARRAY', 'STORAGE SPINDLE', 'VERSION TRANSMISSION', 'NEURAL CHAMBER', 'DEPLOYMENT LIFT'];
+
+function Machine({ index }) {
+  if (index === 0) return <g className="compositor">
+    {[0, 1, 2].map(i => <g key={i} className="glass-panel" style={{ '--part': i }} transform={`translate(${154 + i * 24} ${26 + i * 19})`}><rect width="130" height="82" rx="4" /><path d="M0 17H130" /><circle cx="10" cy="8" r="2" /><circle cx="18" cy="8" r="2" /><rect className="panel-tile" x="10" y="27" width="42" height="43" rx="2" /><path d="M64 30H116M64 42H105M64 54H111M64 66H92" /><path className="panel-write" pathLength="100" d="M64 30H116M64 42H105M64 54H111M64 66H92" /></g>)}
+  </g>;
+  if (index === 1) return <g className="compute-array">{[0, 1, 2].map(i => <g key={i} transform={`translate(${141 + i * 70} ${34 - (i % 2) * 14})`}><path className="rack-side" d="M0 10L12 0H60V110L48 120H0Z" /><rect className="rack-face" x="0" y="10" width="48" height="110" rx="2" />{[0,1,2,3].map(row => <g key={row}><rect className="rack-slot" x="7" y={20+row*24} width="34" height="17" rx="2" /><circle className="rack-led" cx="13" cy={28+row*24} r="2" style={{animationDelay:`${(row+i)*-.6}s`}} /><path d={`M22 ${26+row*24}H35M22 ${31+row*24}H32`} /></g>)}</g>)}</g>;
+  if (index === 2) return <g className="storage-spindle"><path className="spindle" d="M240 22V151" />{[0,1,2,3].map(i => <g key={i} className="storage-disc" style={{'--part':i}}><ellipse cx="240" cy={126-i*27} rx="70" ry="20" /><ellipse className="disc-groove" cx="240" cy={126-i*27} rx="52" ry="13" /><ellipse className="disc-hub" cx="240" cy={126-i*27} rx="11" ry="4" /><path className="disc-read" d={`M170 ${126-i*27}a70 20 0 0 1 140 0`} /></g>)}<path className="read-arm" d="M340 135V67H275L248 46" /><circle cx="248" cy="46" r="4" /></g>;
+  if (index === 3) return <g className="transmission"><path className="belt" d="M177 43H285a46 46 0 0 1 0 92H177a46 46 0 0 1 0-92Z" />{[177,285].map((x,i)=><g key={x} transform={`translate(${x} 89)`}><g className={`gear gear-${i}`}><circle r="35" /><circle className="gear-teeth" r="43" /><circle className="gear-hub" r="12" />{[0,60,120].map(angle=><path key={angle} transform={`rotate(${angle})`} d="M-30 0H-14M14 0H30" />)}</g></g>)}<path className="belt-signal" pathLength="100" d="M177 43H285a46 46 0 0 1 0 92H177a46 46 0 0 1 0-92Z" /></g>;
+  if (index === 4) return <g className="neural-chamber"><g className="neural-cage"><ellipse cx="240" cy="88" rx="87" ry="53" /><ellipse cx="240" cy="88" rx="37" ry="65" /><ellipse cx="240" cy="88" rx="77" ry="26" transform="rotate(-30 240 88)" /><ellipse cx="240" cy="88" rx="77" ry="26" transform="rotate(30 240 88)" /></g><circle className="neural-core" cx="240" cy="88" r="18" />{[[153,88],[327,88],[240,23],[240,153],[174,49],[306,127]].map(([x,y],i)=><g key={i}><path className="neural-link" d={`M240 88L${x} ${y}`} style={{animationDelay:`${i*-.5}s`}} /><circle className="neural-node" cx={x} cy={y} r="5" style={{animationDelay:`${i*-.5}s`}} /></g>)}</g>;
+  return <g className="deployment-lift"><path className="lift-rails" d="M172 28V145M308 28V145" />{[48,88,128].map(y=><g key={y}><path className="lift-platform" d={`M157 ${y}L240 ${y-18}L323 ${y}L240 ${y+18}Z`} /><path d={`M157 ${y}v5l83 18 83-18v-5`} /></g>)}<g className="lift-cargo"><path d="M220 107L240 96L260 107V130L240 141L220 130Z" /><path d="M220 107L240 118L260 107M240 118V141" /></g><path className="lift-signal" pathLength="100" d="M172 145V28M308 145V28" /></g>;
+}
+
+/** Decorative mechanical illustrations, not live metrics. */
+export default function SkillMachine({ index }) {
+  return <div className="skill-machine kinetic-machine" aria-hidden="true">
+    <div className="skill-machine-heading"><span>ENGINE / 0{index + 1}</span><span className="module-leds"><i /><i /><i /></span></div>
+    <div className="kinetic-stage"><div className="kinetic-halo" /><svg viewBox="0 0 480 180" fill="none"><path className="machine-plinth" d="M112 133L240 105L368 133L240 165Z" /><path className="stage-bracket" d="M30 45V22H53M427 22H450V45M30 135V158H53M427 158H450V135" /><Machine index={index} /></svg><span className="kinetic-ticks" /></div>
+    <div className="skill-machine-caption"><span>{titles[index]}</span><span>DESIGN STUDY / 0{index + 1}</span></div>
+  </div>;
+}

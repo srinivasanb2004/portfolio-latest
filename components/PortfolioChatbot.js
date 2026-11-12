@@ -111,31 +111,31 @@ export default function PortfolioChatbot() {
         <section id="portfolio-chat" className="mb-3 flex h-[min(29rem,calc(100vh-6.75rem))] w-[calc(100vw-2rem)] max-w-[26rem] flex-col overflow-hidden rounded-[24px] border border-cyan-300/25 bg-[#070d20]/[0.98] shadow-[0_20px_60px_rgba(0,0,0,0.52)] backdrop-blur-xl" aria-label="Portfolio assistant">
           <header className="flex items-center justify-between border-b border-cyan-200/15 bg-gradient-to-br from-[#102447] via-[#0c1931] to-[#10112e] px-4 py-3.5">
             <div className="flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-blue-500 text-lg text-[#07132c] shadow-[0_0_20px_rgba(34,211,238,0.5)]"><FaRobot /></span>
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-[#c9b38c] text-lg text-[#07132c] shadow-[0_0_20px_rgba(34,211,238,0.5)]"><FaRobot /></span>
               <div>
                 <h2 className="text-base font-bold tracking-tight text-white">Ask Srinivasan&apos;s AI</h2>
                 <p className="mt-0.5 flex items-center gap-1.5 text-xs text-emerald-400"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" />online · knows his work</p>
               </div>
             </div>
-            <button type="button" onClick={() => setIsOpen(false)} className="rounded-lg p-2 text-slate-400 transition hover:bg-white/10 hover:text-white" aria-label="Close chat"><FaTimes /></button>
+            <button type="button" onClick={() => setIsOpen(false)} className="rounded-lg p-2 text-[#a6a39b] transition hover:bg-white/10 hover:text-white" aria-label="Close chat"><FaTimes /></button>
           </header>
           <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
             {messages.map((message, index) => (
-              <div key={`${message.role}-${index}`} className={`max-w-[92%] rounded-2xl px-3.5 py-2.5 text-sm leading-5 ${message.role === 'user' ? 'ml-auto rounded-br-md bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-950/50' : 'rounded-bl-md border border-[#2a3b62] bg-[#151b30] text-slate-200'}`}>
+              <div key={`${message.role}-${index}`} className={`max-w-[92%] rounded-2xl px-3.5 py-2.5 text-sm leading-5 ${message.role === 'user' ? 'ml-auto rounded-br-md bg-gradient-to-r from-[#c9b38c] to-[#c9b38c] text-white shadow-lg shadow-cyan-950/50' : 'rounded-bl-md border border-[#2a3b62] bg-[#151b30] text-[#e6e0d4]'}`}>
                 {message.text}
               </div>
             ))}
             {messages.length === 1 && (
               <div className="flex flex-wrap gap-2 pt-10">
                 {suggestedQuestions.map((suggestedQuestion) => (
-                  <button key={suggestedQuestion} type="button" onClick={() => askSuggestedQuestion(suggestedQuestion)} className="rounded-full border border-cyan-400/55 bg-cyan-400/[0.07] px-3 py-1.5 text-left text-xs text-cyan-100 transition hover:border-cyan-300 hover:bg-cyan-400/15">
+                  <button key={suggestedQuestion} type="button" onClick={() => askSuggestedQuestion(suggestedQuestion)} className="rounded-full border border-[#c9b38c]/55 bg-[#c9b38c]/[0.07] px-3 py-1.5 text-left text-xs text-cyan-100 transition hover:border-cyan-300 hover:bg-[#c9b38c]/15">
                     {suggestedQuestion}
                   </button>
                 ))}
               </div>
             )}
             {messages.length > 1 && (
-              <button type="button" onClick={showQuickQuestions} className="rounded-full border border-cyan-400/45 bg-cyan-400/[0.07] px-3 py-1.5 text-xs text-cyan-100 transition hover:border-cyan-300 hover:bg-cyan-400/15">
+              <button type="button" onClick={showQuickQuestions} className="rounded-full border border-[#c9b38c]/45 bg-[#c9b38c]/[0.07] px-3 py-1.5 text-xs text-cyan-100 transition hover:border-cyan-300 hover:bg-[#c9b38c]/15">
                 ↺ Back to quick questions
               </button>
             )}
@@ -143,14 +143,14 @@ export default function PortfolioChatbot() {
           </div>
           <form onSubmit={handleSubmit} className="flex gap-2.5 border-t border-cyan-200/10 px-4 py-3">
             <label className="sr-only" htmlFor="portfolio-question">Ask a portfolio question</label>
-            <input id="portfolio-question" value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ask about projects, skills, work..." className="min-w-0 flex-1 rounded-xl border border-[#34466e] bg-[#11172c] px-3.5 py-2.5 text-sm text-white outline-none placeholder:text-slate-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/15" />
-            <button type="submit" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-blue-500 text-[#06142d] shadow-lg shadow-cyan-900/40 transition hover:scale-105 hover:from-cyan-200 hover:to-blue-400" aria-label="Send question"><FaPaperPlane className="text-sm" /></button>
+            <input id="portfolio-question" value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ask about projects, skills, work..." className="min-w-0 flex-1 rounded-xl border border-[#34466e] bg-[#11172c] px-3.5 py-2.5 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#c9b38c] focus:ring-2 focus:ring-cyan-400/15" />
+            <button type="submit" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-[#c9b38c] text-[#06142d] shadow-lg shadow-cyan-900/40 transition hover:scale-105 hover:from-cyan-200 hover:to-[#c9b38c]" aria-label="Send question"><FaPaperPlane className="text-sm" /></button>
           </form>
         </section>
       )}
       <button type="button" onClick={() => setIsOpen((current) => !current)} className="portfolio-ai-launcher group grid h-[4.25rem] w-[4.25rem] place-items-center rounded-full border border-cyan-300/45 bg-[#0c1830]/95 text-2xl text-cyan-100 shadow-[0_12px_30px_rgba(8,145,178,0.28)] backdrop-blur-md transition hover:scale-110 hover:border-cyan-200 hover:bg-[#122242] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300" aria-expanded={isOpen} aria-controls="portfolio-chat" aria-label={isOpen ? 'Close portfolio assistant' : 'Open portfolio assistant'} title={isOpen ? 'Close AI assistant' : 'Ask Srinivasan’s AI'}>
         {!isOpen && <span aria-hidden="true" className="portfolio-ai-greeting">Hi, welcome! 👋</span>}
-        <span className="portfolio-ai-launcher__icon grid h-11 w-11 place-items-center rounded-2xl bg-cyan-400/15 text-cyan-200 transition group-hover:bg-cyan-300 group-hover:text-[#06142d]"><FaRobot /></span>
+        <span className="portfolio-ai-launcher__icon grid h-11 w-11 place-items-center rounded-2xl bg-[#c9b38c]/15 text-[#c9b38c] transition group-hover:bg-cyan-300 group-hover:text-[#06142d]"><FaRobot /></span>
       </button>
     </div>
   );

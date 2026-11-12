@@ -1,0 +1,251 @@
+/* Machine edition — animated hardware geometry with restrained metallic light. */
+.dark-theme { --signal: #94d6bf; --metal: #c9b38c; }
+.dark-theme .hero-composition { grid-template-columns: 1.05fr 1fr; gap: 5%; padding-top: 38px; }
+.dark-theme .hero-copy h1 { font-size: clamp(48px, 5.5vw, 86px); letter-spacing: -3px; }
+.dark-theme .hero-copy h1 em { color: #b9d3c1; }
+.dark-theme .hero-intro { max-width: 420px; }
+.hero-machine { min-width: 0; }
+.machine-core { position: relative; background: linear-gradient(135deg,#151e1be6,#0b100fe8); border: 1px solid #9ccab62e; box-shadow: 0 30px 90px -45px #000; color: #b4cfc1; }
+.machine-top,.machine-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 17px 20px; font: 8px monospace; letter-spacing: 1.5px; border-bottom: 1px solid #9ccab622; }
+.machine-top span:last-child { color: #7f998b; font-size: 7px; }
+.machine-stage { position: relative; aspect-ratio: 1; overflow: hidden; background: radial-gradient(circle,#87c8aa0e,transparent 60%),linear-gradient(#9ccab609 1px,transparent 1px),linear-gradient(90deg,#9ccab609 1px,transparent 1px); background-size: auto,28px 28px,28px 28px; }
+.machine-ring { position: absolute; border-radius: 50%; inset: 12%; border: 1px solid #91c5ac2e; }
+.ring-outer { border-style: dashed; border-width: 1px; animation: rotor-turn 70s linear infinite; }
+.ring-ticks { inset: 17%; border: 9px dotted #b9a17b66; animation: rotor-turn 50s linear infinite reverse; }
+.ring-inner { inset: 23%; border: 2px solid transparent; border-top-color: #a7d5bd99; border-bottom-color: #a7d5bd55; box-shadow: 0 0 35px #98d2b60c; animation: rotor-turn 15s linear infinite; }
+.machine-radar { position: absolute; inset: 15%; border-radius: 50%; background: conic-gradient(from 0deg,transparent 75%,#92c6ac15 95%,#92c6ac40 100%); animation: rotor-turn 12s linear infinite; }
+.machine-wires { position: absolute; inset: 0; height: 100%; width: 100%; }
+.wire-base { stroke: #9db7a344; stroke-width: 1; }
+.wire-packets { stroke: #b2e3cc; stroke-width: 2; stroke-dasharray: 5 95; }
+.wire-packets path { animation: packet-run 4s linear infinite; }
+.wire-packets path:nth-child(2) { animation-delay: -1s; stroke: #d4b78b; }
+.wire-packets path:nth-child(3) { animation-delay: -2s; }
+.wire-packets path:nth-child(4) { animation-delay: -3s; }
+.processor { position: absolute; inset: 36%; padding: 7px; border: 1px solid #bbd8bf66; background: repeating-linear-gradient(90deg,#8ab29c55 0 2px,transparent 2px 10px); box-shadow: 0 0 55px #a8dfb51a; animation: processor-glow 5s ease-in-out infinite; }
+.processor-inner { height: 100%; background: #17221c; border: 1px solid #c9b38c66; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.processor-inner svg { color: #c9b38c; width: 28%; height: auto; }
+.processor strong { font: 23px monospace; letter-spacing: 3px; color: #e1e8d8; }
+.processor strong span { color: #b5d4a8; }
+.processor small { font: 6px monospace; letter-spacing: 2px; }
+.machine-module { position: absolute; display: flex; align-items: center; gap: 10px; border: 1px solid #a5c5ad55; padding: 12px; background: #151f1af5; box-shadow: 0 7px 30px #0004; font: 8px monospace; letter-spacing: 1px; animation: module-hover 7s ease-in-out infinite; }
+.machine-module small { display: block; margin-top: 6px; font-size: 7px; letter-spacing: 0; color: #93a996; }
+.machine-module i { width: 4px; height: 4px; background: #a8d9b5; border-radius: 50%; box-shadow: 0 0 8px #a8d9b5; }
+.module-ui { top: 12%; left: 5%; }
+.module-api { right: 3%; top: 45%; animation-delay: -2s; }
+.module-db { bottom: 10%; left: 12%; animation-delay: -4s; }
+.machine-coordinate { position: absolute; top: 20px; left: 20px; font: 7px monospace; letter-spacing: 1.3px; color: #78917e; }
+.machine-cross { position: absolute; color: #b1c9b266; font: 25px monospace; }.cross-one{top:20%;right:10%}.cross-two{bottom:13%;right:15%}
+.machine-bottom { border-top: 1px solid #9ccab622; border-bottom: 0; }
+.signal-bars { display: flex; gap: 3px; height: 20px; align-items: center; }
+.signal-bars i { width: 2px; height: 16px; background: #9ac4a9; transform-origin: center; animation: waveform 1.8s ease-in-out infinite alternate; }
+.developer-signature { display: flex; align-items: center; gap: 12px; padding: 18px 0; }
+.developer-signature img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; filter: saturate(.4); border: 1px solid #c9b38c55; }
+.developer-signature strong { display: block; font-size: 12px; font-weight: 500; color: #dedfd4; }
+.developer-signature small { display: block; font: 8px monospace; color: #909f91; margin-top: 7px; }
+.signature-mark { margin-left: auto; color: #b8c8b0; font: 22px monospace; }
+/* A continuous, layered machine environment through all chapters. */
+.dark-theme .scene-ribbons { opacity: .2; }
+.dark-theme .scene-circuit { opacity: .95; }
+.dark-theme .circuit-traces { stroke: #a7cdb6; opacity: .35; }
+.dark-theme .circuit-signals { stroke: #b4eed0; }
+.dark-theme .circuit-signals path { animation-duration: 8s; }
+.machine-floor { position: absolute; width: 150%; height: 650px; bottom: -320px; left: -25%; background: linear-gradient(#9ac4ad20 1px,transparent 1px),linear-gradient(90deg,#9ac4ad20 1px,transparent 1px); background-size: 65px 65px; transform: perspective(500px) rotateX(55deg); mask-image: radial-gradient(ellipse,black,transparent 68%); animation: floor-flow 12s linear infinite; }
+.machine-rail { position: absolute; top: 0; bottom: 0; width: 1px; background: #a3c1a31a; }.rail-left{left:2%}.rail-right{right:2%}
+.machine-rail i { position: absolute; width: 2px; height: 65px; background: linear-gradient(transparent,#b2d1b4,transparent); animation: rail-flow 12s linear infinite; }
+.machine-rail i:nth-child(2){animation-delay:-4s}.machine-rail i:nth-child(3){animation-delay:-8s}.rail-right i{animation-direction:reverse}
+.ambient-reticle { position: absolute; width: 500px; height: 500px; top: 25%; right: -250px; opacity: .5; transform: translateY(var(--scene-shift,0px)); }
+.ambient-reticle i { position: absolute; inset: 0; border: 1px dashed #aac7af55; border-radius: 50%; animation: rotor-turn 80s linear infinite; }
+.ambient-reticle i:nth-child(2){inset:15%;border:8px dotted #c9b38c33;animation-direction:reverse}.ambient-reticle span{position:absolute;inset:40%;font:70px monospace;color:#a8c8b055}
+/* Pointer-following light and etched edges on all primary surfaces. */
+.tech-surface { isolation: isolate; }
+/* Project cards already establish positioning with their responsive sticky utilities. */
+.tech-surface:not(.project-stack-card) { position: relative; }
+.tech-surface::after { content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 2; pointer-events: none; opacity: 0; background: radial-gradient(400px circle at var(--hover-x,50%) var(--hover-y,50%),#9eeac011,transparent 65%); box-shadow: inset 0 0 0 1px #a5d3b777; transition: opacity .35s ease; }
+.tech-surface:hover::after,.tech-surface:focus-within::after { opacity: 1; }
+.dark-theme .tech-surface:hover { border-color: #9fcaac88 !important; }
+.dark-theme :is(.lux-button,.nav-contact,.nav-resume,.text-link,.system-node,#projects a,#contact button[type=submit]) { transition: color .25s,background .25s,box-shadow .25s,border-color .25s,transform .25s; }
+.dark-theme :is(.lux-button,.nav-contact,#projects a,#contact button[type=submit]):hover { box-shadow: 0 0 0 1px #c9b38c50,0 0 30px #9bdeb51a; transform: translateY(-3px); }
+.dark-theme .text-link:hover { color: #b1e2c8; border-color: #b1e2c8; }
+.dark-theme .main-navigation a:hover { text-shadow: 0 0 16px #b4e4c870; color: #b8e1c8; }
+.dark-theme #skills li { transition: background .25s,border-color .25s,color .25s; }
+.dark-theme #skills li:hover { background: #9bc7ad18; border-color: #a9cfb485; color: #d4ead8; }
+.dark-theme #contact :is(input,textarea):focus { box-shadow: 0 0 22px #9bdeb515; border-color: #abcdb6; }
+.cinematic-section:not(.scene-visible) :is(.machine-core *, .signal-bars i) { animation-play-state: paused; }
+@keyframes rotor-turn{to{rotate:360deg}}
+@keyframes packet-run{to{stroke-dashoffset:-100}}
+@keyframes processor-glow{50%{box-shadow:0 0 65px #a8dfb52b}}
+@keyframes module-hover{50%{transform:translateY(-7px)}}
+@keyframes waveform{from{scale:1 .2}to{scale:1 1}}
+@keyframes floor-flow{to{background-position:0 65px,0 65px}}
+@keyframes rail-flow{from{top:-65px}to{top:100%}}
+@media(max-width:767px){
+ .dark-theme .hero-composition{grid-template-columns:1fr;gap:35px}.dark-theme .hero-copy h1{font-size:clamp(44px,9.8vw,72px);letter-spacing:-2px}
+ .machine-top,.machine-bottom{padding:14px 12px;font-size:7px}.machine-top span:last-child{font-size:6px}.machine-module{padding:8px;gap:6px;font-size:7px}.machine-module small{font-size:6px}.machine-module svg{width:15px}.processor strong{font-size:18px}.machine-coordinate{font-size:6px;top:12px;left:12px}.machine-floor{opacity:.6}.machine-rail{display:none}
+}
+@media(prefers-reduced-motion:reduce){.machine-core *,.machine-floor,.machine-rail i,.ambient-reticle i{animation:none!important}.tech-surface::after{background:none}.dark-theme :is(.lux-button,.nav-contact,#projects a,#contact button[type=submit]):hover{transform:none}}
+
+/* Blueprint request simulator: independent of the reader's selected layer. */
+#engineering .system-console { overflow: hidden; }
+.blueprint-status { display: inline-flex; align-items: center; gap: 9px; }
+.blueprint-status > i { width: 5px; height: 5px; border-radius: 50%; background: #b1dfbd; box-shadow: 0 0 12px #b1dfbd60; animation: blueprint-heartbeat 3s ease-in-out infinite; }
+#engineering .system-node { position: relative; overflow: hidden; min-height: 96px; }
+#engineering .system-node-wrap { position: relative; }
+#engineering .system-node-wrap::before { content: ''; position: absolute; z-index: 2; top: 0; left: 0; width: 2px; height: 96px; pointer-events: none; background: #b2ebc7; box-shadow: 0 0 18px #b2ebc780; animation: node-process 9s linear infinite; animation-delay: var(--node-phase); opacity: .15; }
+.node-machine-icon { position: relative; display: grid; place-items: center; width: 42px; height: 42px; flex-shrink: 0; }
+.node-machine-icon > i { position: absolute; inset: 0; border-radius: 50%; border: 1px dashed currentColor; opacity: .45; animation: rotor-turn 14s linear infinite; }
+.node-machine-icon svg { width: 21px; height: 21px; }
+.node-activity { display: flex; align-items: center; gap: 3px; margin-left: auto; height: 22px; opacity: .8; }
+.node-activity i { display: block; width: 2px; height: 18px; background: currentColor; transform: scaleY(.2); animation: node-meter 2.4s ease-in-out infinite alternate; }
+.node-activity i:nth-child(2) { animation-delay: -.4s; }.node-activity i:nth-child(3) { animation-delay: -1.1s; }.node-activity i:nth-child(4) { animation-delay: -.7s; }.node-activity i:nth-child(5) { animation-delay: -1.8s; }
+#engineering .node-index { margin-left: 10px; }
+.node-sweep { position: absolute; pointer-events: none; inset: 0; background: linear-gradient(100deg,transparent 30%,#b9f3d012 49%,#b9f3d040 50%,transparent 70%); transform: translateX(-110%); animation: node-scan 9s ease-in-out infinite; animation-delay: var(--node-phase); }
+.system-node.is-selected .node-sweep { background: linear-gradient(100deg,transparent 30%,#fff5 50%,transparent 70%); }
+#engineering .system-connector { height: 58px; border-left: 1px solid #adc39055; margin-left: 41px; }
+#engineering .system-connector::after { content: ''; position: absolute; top: 0; bottom: 0; left: 8px; border-left: 1px dashed #adc39022; }
+#engineering .system-connector > i { height: 16px; width: 3px; animation: blueprint-packet 2s linear infinite; }
+#engineering .system-connector > .return-packet { left: 7px; background: #d1b383; animation-direction: reverse; animation-delay: -1s; }
+#engineering .system-connector > span { left: 25px; top: 23px; }
+.pipeline-loop { display: flex; align-items: center; gap: 12px; color: #9aaa91; font: 8px monospace; letter-spacing: 1.4px; margin-top: 24px; }
+.pipeline-loop > div { position: relative; overflow: hidden; flex: 1; height: 12px; border-top: 1px solid #b8d6b233; border-bottom: 1px solid #b8d6b222; }
+.pipeline-loop i { position: absolute; width: 24px; height: 1px; left: -24px; top: 2px; background: #b4dfbc; box-shadow: 0 0 6px #b4dfbc; animation: loop-signal 3s linear infinite; }
+.pipeline-loop i:last-child { top: 8px; background: #c9b38c; animation-direction: reverse; }
+.blueprint-code { position: relative; }
+.blueprint-code::after { content: ''; position: absolute; inset: 40px 0 30px; pointer-events: none; background: linear-gradient(transparent 45%,#abd7b51c 50%,transparent 55%); animation: code-scan 6s ease-in-out infinite; }
+.blueprint-code .execution-line { display: block; width: max-content; min-width: 100%; animation: execution-highlight 3.6s ease-in-out infinite; animation-delay: var(--line-phase); }
+.blueprint-code pre { white-space: pre; }
+.blueprint-code code { display: block; }
+.blueprint-code .execution-line:last-child::after { content: '▊'; color: #bfd9ae; margin-left: 8px; animation: blueprint-heartbeat 1.6s ease-in-out infinite; }
+.blueprint-telemetry { border-top: 1px solid #a9b59530; padding: 18px 28px; display: flex; align-items: center; gap: 24px; background: #101710aa; color: #a7b99b; }
+.telemetry-label { font: 8px monospace; letter-spacing: 2px; }
+.telemetry-wave { height: 24px; display: flex; align-items: center; gap: 3px; }
+.telemetry-wave > i { width: 2px; height: 20px; background: #99bfa6; animation: node-meter 2s ease-in-out infinite alternate; }
+.cycle-stages { display: flex; margin-left: auto; gap: 24px; font: 8px monospace; letter-spacing: 1px; }
+.cycle-stages span { animation: node-process 9s linear infinite; }
+.cycle-stages span:nth-child(2) { animation-delay: 3s; }.cycle-stages span:nth-child(3) { animation-delay: 6s; }
+@keyframes node-process { 0%,30% { opacity: 1; } 34%,96% { opacity: .22; } 100% { opacity: 1; } }
+@keyframes node-scan { 0% { transform: translateX(-110%); } 30%,100% { transform: translateX(110%); } }
+@keyframes node-meter { 0% { transform: scaleY(.2); } 40% { transform: scaleY(.85); } 70% { transform: scaleY(.4); } 100% { transform: scaleY(1); } }
+@keyframes blueprint-packet { from { transform: translateY(-8px); opacity: 0; } 15%,85% { opacity: 1; } to { transform: translateY(43px); opacity: 0; } }
+@keyframes loop-signal { to { left: 100%; } }
+@keyframes code-scan { from { transform: translateY(-35%); opacity: 0; } 50% { opacity: 1; } to { transform: translateY(35%); opacity: 0; } }
+@keyframes execution-highlight { 0%,28% { background: #afd6aa12; color: #e2f5d8; } 35%,100% { background: transparent; } }
+@keyframes blueprint-heartbeat { 50% { opacity: .3; } }
+.cinematic-section:not(.scene-visible) .system-console *,
+.cinematic-section:not(.scene-visible) .system-console *::before,
+.cinematic-section:not(.scene-visible) .system-console *::after { animation-play-state: paused !important; }
+@media(max-width:767px) {
+ #engineering .system-node { gap: 12px; padding: 16px 12px; }
+ .node-machine-icon { width: 34px; height: 34px; }.node-activity { gap: 2px; }
+ .blueprint-telemetry { padding: 18px; gap: 15px; flex-wrap: wrap; }
+ .cycle-stages { flex-basis: 100%; margin: 0; justify-content: space-between; gap: 8px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ #engineering .system-console *, #engineering .system-console *::before, #engineering .system-console *::after { animation: none !important; }
+ .node-sweep,.blueprint-code::after { display: none; }
+}
+
+/* Skill modules: compact machinery diagrams, not invented live metrics. */
+#skills .skill-module-card { overflow: hidden; background: linear-gradient(125deg,#19211b,#151a17); border-color: #a3c1a333; }
+#skills .skill-module-card > div:first-child { margin-bottom: 22px; }
+#skills .skill-module-card > div:first-child > span { position: relative; background: #9bbfa31a; border: 1px solid #a5c8a933; color: #c5d6b8; }
+#skills .skill-module-card > div:first-child > span::after { content: ''; position: absolute; inset: -4px; border: 1px solid transparent; border-top-color: #adcfa388; border-bottom-color: #adcfa344; border-radius: 50%; animation: rotor-turn 12s linear infinite; animation-delay: var(--module-delay); }
+.skill-machine { margin-bottom: 24px; border: 1px solid #a3c1a325; background: #0c130f80; }
+.skill-machine-heading,.skill-machine-caption { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 10px 12px; font: 8px monospace; letter-spacing: 1.4px; color: #9caf94; }
+.skill-machine-heading { border-bottom: 1px solid #a3c1a318; }
+.skill-machine-caption { border-top: 1px solid #a3c1a318; font-size: 7px; color: #9baf91; }
+.module-leds { display: flex; gap: 5px; }
+.module-leds i { width: 3px; height: 3px; border-radius: 50%; background: #c0dfb0; animation: blueprint-heartbeat 2.4s ease-in-out infinite; animation-delay: var(--module-delay); }
+.module-leds i:nth-child(2) { animation-delay: -1s; }.module-leds i:nth-child(3) { animation-delay: -1.8s; }
+/* Original hero portrait at the heart of the machine. */
+.processor.processor-portrait { inset: 29% 32%; padding: 6px; }
+.processor-photo { position: relative; height: 100%; overflow: hidden; border: 1px solid #c9b38c88; background: #111913; }
+.processor-photo img { object-fit: cover; object-position: center 28%; }
+@media(max-width:767px) { .processor.processor-portrait { padding: 4px; } }
+
+/* Kinetic skill sculptures: six distinct mechanical assemblies. */
+.kinetic-machine { background: linear-gradient(135deg,#101a15,#0d1210); }
+.kinetic-stage { height: 180px; position: relative; overflow: hidden; background-image: radial-gradient(#abc5ad16 .7px,transparent .7px); background-size: 14px 14px; }
+.kinetic-stage svg { position: relative; z-index: 1; width: 100%; height: 100%; stroke: #acc9b0; stroke-width: 1; }
+.kinetic-halo { position: absolute; inset: 5% 20%; background: radial-gradient(ellipse,#9dcaad14,transparent 70%); }
+.machine-plinth { fill: #adcab905; stroke: #adcab91c; }
+.stage-bracket { stroke: #b9cea33d; }
+.kinetic-ticks { position: absolute; left: 20px; top: 35%; height: 50px; width: 12px; background: repeating-linear-gradient(0deg,#adc5a733 0 1px,transparent 1px 8px); }
+.glass-panel { fill: #1c2c24e6; stroke: #b5d5be88; animation: panel-breathe 6s ease-in-out infinite; animation-delay: calc(var(--part) * -1s); }
+.panel-tile { fill: #b5d5be20; stroke: #b5d5be44; }
+.panel-write { stroke: #e5d2a2; stroke-width: 1.8; stroke-dasharray: 30 70; animation: packet-run 4s linear infinite; }
+.rack-side { fill: #2c3c2e; stroke: #b5d5be66; }.rack-face{fill:#142019;stroke:#b5d5be88}.rack-slot{fill:#a5d4ae0a;stroke:#b5d5be33}
+.rack-led { fill: #c5e2ad; stroke: none; animation: rack-activity 3s ease-in-out infinite; }.compute-array path:not(.rack-side){stroke:#abc5ad66}
+.storage-disc { animation: disc-float 5s ease-in-out infinite; animation-delay: calc(var(--part) * -.7s); }
+.storage-disc>ellipse:first-child{fill:#1b2b21;stroke:#bed4b788}.disc-groove{stroke:#abc5ad44}.disc-hub{fill:#c9b38c;stroke:none}
+.disc-read { stroke: #dec99a; stroke-width: 2; stroke-dasharray: 25 200; animation: spindle-read 4s linear infinite; }.spindle{stroke:#c9b38c88}.read-arm{stroke:#c9b38c;stroke-width:2}
+.belt { stroke: #b7c7ae55; stroke-width: 8; }.belt-signal{stroke:#c9b38c;stroke-width:2;stroke-dasharray:8 92;animation:packet-run 7s linear infinite}
+.gear{animation:gear-drive 12s linear infinite}.gear-1{animation-direction:reverse}.gear>circle:first-child{fill:#17261d;stroke:#a7c8ac99}.gear-teeth{stroke:#c3c7a5;stroke-width:8;stroke-dasharray:5 6}.gear-hub{fill:#b4d5ab15;stroke:#c9b38c}
+.neural-cage { stroke: #b5cdb24d; }.neural-core{fill:#b4d4aa18;stroke:#c9b38c;animation:neural-breathe 4s ease-in-out infinite;transform-origin:240px 88px}
+.neural-link{stroke:#c9b38c55;stroke-dasharray:3 6;animation:neural-stream 3s linear infinite}.neural-node{fill:#a5caa7;stroke:#dcdeb8;animation:rack-activity 3s ease-in-out infinite}
+.lift-platform{fill:#a4c4a70d;stroke:#b0cdb066}.deployment-lift>g>path:not(.lift-platform){stroke:#9db69f44}.lift-rails{stroke:#c9b38c66;stroke-width:2}.lift-cargo{fill:#283b2b;stroke:#d4c598;animation:lift-travel 6s ease-in-out infinite}.lift-signal{stroke:#d9e6b8;stroke-width:2;stroke-dasharray:10 90;animation:packet-run 4s linear infinite}
+#skills .skill-module-card:hover .kinetic-machine { border-color: #c9b38c70; }
+#skills .skill-module-card:hover .kinetic-halo { background: radial-gradient(ellipse,#9dcaad24,transparent 70%); }
+@keyframes panel-breathe { 50% { translate: 0 -8px; } }
+@keyframes rack-activity { 0%,100%{opacity:.25}35%,65%{opacity:1} }
+@keyframes disc-float { 50%{translate:0 -5px} }
+@keyframes spindle-read { to{stroke-dashoffset:-225} }
+@keyframes gear-drive { to{transform:rotate(360deg)} }
+@keyframes neural-breathe { 50%{transform:scale(1.18);fill:#b4d4aa30} }
+@keyframes neural-stream { to{stroke-dashoffset:-36} }
+@keyframes lift-travel { 0%,15%,100%{translate:0 0}45%,65%{translate:0 -75px} }
+.cinematic-section:not(.scene-visible) .skill-module-card *,
+.cinematic-section:not(.scene-visible) .skill-module-card *::after { animation-play-state: paused !important; }
+@media(max-width:767px){.kinetic-stage{height:150px}.skill-machine-caption{font-size:6px;letter-spacing:.8px}.skill-machine-heading{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.skill-module-card *,.skill-module-card *::after{animation:none!important}}
+.theme-toggle { display: grid; place-items: center; flex-shrink: 0; width: 38px; height: 38px; border: 1px solid #c9b38c55; border-radius: 50%; background: #18221b; color: #c9b38c; cursor: pointer; } .light-theme .theme-toggle { background: #fffdf7; color: #705936; }
+
+/* Career timeline: a signal bus with mechanical credential housings. */
+.journey-bus { position: relative; }
+.journey-bus::before { content: ''; position: absolute; left: -1px; top: 0; width: 2px; height: 48px; background: linear-gradient(transparent,#c0dfb5,transparent); box-shadow: 0 0 14px #a9d9aa30; animation: journey-signal 7s linear infinite; pointer-events: none; }
+.journey-card { border-left-color: #b6cba666 !important; }
+.journey-instrument { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #a8c29e22; font: 8px monospace; letter-spacing: 1.5px; color: #93a68b; }
+.journey-instrument > div { height: 16px; display: flex; align-items: center; gap: 3px; }
+.journey-instrument i { width: 2px; height: 12px; background: #b6cda4; animation: node-meter 2.8s ease-in-out infinite alternate; }
+.journey-port::before { content: ''; position: absolute; inset: -5px; border: 1px solid #b7d5a955; border-radius: 50%; animation: journey-ping 4s ease-out infinite; }
+.journey-port::after { content: ''; position: absolute; left: 12px; top: 5px; width: 18px; height: 1px; background: #c9b38c66; }
+.credential-card { position: relative; overflow: hidden; min-height: 100px; align-items: center; }
+.credential-card::before { content: ''; position: absolute; height: 1px; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg,transparent,#bfdbaf,transparent); animation: credential-sweep 6s ease-in-out infinite; pointer-events: none; }
+.credential-rotor { position: relative; border-radius: 50% !important; background: #b4c69f0b !important; }
+.credential-orbit { position: absolute; inset: -6px; border: 1px dashed #bbcca355; border-radius: 50%; animation: rotor-turn 22s linear infinite; }
+.credential-orbit::after { content: ''; position: absolute; top: 6px; left: 6px; width: 4px; height: 4px; background: #c9b38c; box-shadow: 0 0 9px #c9b38c66; border-radius: 50%; }
+.credential-card:hover .credential-rotor { box-shadow: 0 0 22px #b6d5a81c; }
+.light-theme .journey-instrument { color: #53634b; border-color: #71836733; }.light-theme .journey-instrument i { background: #637e56; }
+@keyframes journey-signal { from { top: 0; opacity: 0; } 10%,90%{opacity:1} to { top: calc(100% - 48px); opacity: 0; } }
+@keyframes journey-ping { 0% { transform: scale(.8); opacity:.7; } 80%,100% { transform:scale(1.7);opacity:0; } }
+@keyframes credential-sweep { 0%,100% { transform:translateX(-100%); } 60% { transform:translateX(100%); } }
+.cinematic-section:not(.scene-visible) .journey-bus::before,
+.cinematic-section:not(.scene-visible) .journey-card *,
+.cinematic-section:not(.scene-visible) .journey-card *::before,
+.cinematic-section:not(.scene-visible) .credential-card::before,
+.cinematic-section:not(.scene-visible) .credential-orbit { animation-play-state: paused !important; }
+@media(prefers-reduced-motion:reduce){.journey-bus::before,.journey-card *,.journey-card *::before,.credential-card::before,.credential-orbit{animation:none!important}.journey-port::before{display:none}}
+
+/* One-time character reveal; invisible letters retain the final layout. */
+.typed-hero-line { display: block; }
+.typed-hero-word { display: inline-block; }
+.typed-hero-character { opacity: 0; animation: hero-character-type 1ms step-end forwards; }
+@keyframes hero-character-type { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .typed-hero-character { opacity: 1; animation: none !important; } }
+
+/* Stateful typing: completed letters never depend on CSS animation playback. */
+.typed-letter { position: relative; }
+.has-typing-cursor::after { content: ''; position: absolute; right: -.05em; top: .12em; height: .8em; border-right: 2px solid currentColor; animation: hero-caret-blink 1s steps(1) infinite; pointer-events: none; }
+.cursor-at-start::after { right: auto; left: 0; }
+@keyframes hero-caret-blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+@media(prefers-reduced-motion:reduce) { .typed-letter > span { visibility: visible !important; }.has-typing-cursor::after { display: none; } }
+
+/* Keep the headline aligned with the machine rather than centred beside it. */
+.hero-stage .hero-topline { padding-bottom: 18px; }
+.hero-stage .hero-composition { align-items: start; padding-top: 20px; padding-bottom: 44px; }
+.hero-stage .hero-copy { padding-top: 12px; }
+.hero-stage .hero-machine { width: 100%; max-width: 520px; justify-self: end; }
+@media(max-width:767px) {
+  .hero-stage .hero-composition { padding-top: 18px; padding-bottom: 32px; }
+  .hero-stage .hero-copy { padding-top: 0; }
+  .hero-stage .hero-machine { justify-self: center; }
+}

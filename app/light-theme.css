@@ -1,0 +1,111 @@
+/* Ivory Atelier — the light experiment. Dark restore point: THEME_RESTORE.md. */
+.light-theme {
+  --background: #f7f4ed;
+  --foreground: #292a25;
+  --gold: #866534;
+  --line: rgba(99, 79, 47, .19);
+  background: var(--background);
+  color: var(--foreground);
+}
+.light-theme ::selection { background: #d9c49b; color: #25271f; }
+.light-theme .site-header { background: #f7f4eded; border-color: var(--line); }
+.light-theme .wordmark { color: #292a25; }
+.light-theme .wordmark small,
+.light-theme .main-navigation { color: #68675e; }
+.light-theme .nav-contact { background: #efeadf; border-color: #b8a37e70; }
+.light-theme .nav-contact:hover { background: #e4d7be; }
+.light-theme .cinematic-section { background: #f7f4ed; }
+.light-theme .cinematic-section:nth-of-type(even) { background: #efebe2; }
+.light-theme .hero-stage { background: transparent; }
+.light-theme .hero-copy h1 { color: #2c3029; }
+.light-theme .hero-copy h1 em { color: #94713e; }
+.light-theme .hero-intro,
+.light-theme .hero-topline,
+.light-theme .hero-bottom { color: #6c6b60; }
+.light-theme .eyebrow { color: #7e6033; }
+.light-theme .status-dot { background: #7a8664; box-shadow: 0 0 0 5px #7a866414; }
+.light-theme .lux-button { background: #30382d; color: #faf7ee; border: 1px solid #30382d; box-shadow: 0 8px 22px #30382d12; }
+.light-theme .lux-button:hover { background: #4d5845; box-shadow: 0 14px 28px #30382d20; }
+.light-theme .text-link { color: #685332; border-color: #aa8e5f70; }
+.light-theme .hero-portrait { padding: 12px; background: #ffffff80; border-color: #b6a38670; box-shadow: 22px 25px 0 -12px #e5ddce, 0 28px 60px -35px #62513660; }
+.light-theme .portrait-image { filter: saturate(.55) sepia(.1); }
+.light-theme .portrait-caption { color: #f7f4ed; }
+.light-theme .portrait-note { color: #80643e; }
+.light-theme .hero-orbit i { border-color: #93734020; }
+.light-theme .hero-bottom { border-color: var(--line); }
+.light-theme main > section:not(#home) { color: #30332b; }
+.light-theme main > section:not(#home) .text-white { color: #30332b; }
+.light-theme main > section:not(#home) [class*="text-[#a6a39b]"],
+.light-theme main > section:not(#home) [class*="text-[#e6e0d4]"],
+.light-theme main > section:not(#home) .text-gray-300 { color: #67685d; }
+.light-theme main > section:not(#home) [class*="text-[#c9b38c]"],
+.light-theme main > section:not(#home) .bg-clip-text { color: #806036; }
+.light-theme main > section:not(#home) [class*="bg-white/5"] { background: #ffffff55; border-color: #a99c7f38; }
+.light-theme main > section:not(#home) [class*="border-white/10"] { border-color: #a99c7f38; }
+.light-theme main > section:not(#home) [class*="bg-[#101110]"] { background: #eee8dc; }
+.light-theme main > section:not(#home) [class*="shadow-[0_0_"] { box-shadow: 0 0 15px #a8885240; }
+.light-theme #about img { filter: saturate(.4) sepia(.12); }
+.light-theme #about .grid.grid-cols-3 > div { background: transparent; border: 0; }
+.light-theme #about .grid.grid-cols-3 > div + div { border-left: 1px solid var(--line); }
+.light-theme #skills article { background: #fffdf666; border-color: #aa987d45; box-shadow: 0 12px 35px -25px #80603630; }
+.light-theme #skills article:hover { background: #fffdf9; border-color: #a0885e90; }
+.light-theme #skills li { color: #55594c; background: #e8e4d955; border-color: #a99c7f40; }
+.light-theme #skills .skills-marquee__item { color: #6c705f; }
+.light-theme #skills .skills-marquee__item svg { color: #7b795c; }
+.light-theme #skills article > div > span { background: #d8cbae45; color: #786440; }
+.light-theme #projects article { background: #fdfbf6; border-color: #b4a58a66; box-shadow: 0 25px 65px -40px #493a2066; }
+.light-theme #projects article:hover { border-color: #967746; }
+.light-theme #projects article > div:first-child { background: linear-gradient(135deg, #e5ddcd, #efebe1); }
+.light-theme #projects article a { border-color: #b4a58a66; background: #f0ece2; color: #4f513e; }
+.light-theme #projects article a:last-child,
+.light-theme #contact button[type=submit] { background: #333c2e; color: #fcfaf3; }
+.light-theme #projects article a:last-child:hover,
+.light-theme #contact button[type=submit]:hover { background: #536047; }
+.light-theme #projects article .rounded-full { background: #eeeadf; color: #77613d; border-color: #b4a58a66; }
+.light-theme #contact input,
+.light-theme #contact textarea { background: #fffdf7; color: #30332b; border-color: #aa987d66; }
+.light-theme #contact input::placeholder,
+.light-theme #contact textarea::placeholder { color: #838274; }
+.light-theme #contact form { color: #30332b; }
+.light-theme #contact [role=status] { color: #3f593b; background: #e6eddf; }
+.light-theme #contact [role=status].text-red-300 { color: #983d30; background: #f7e7df; }
+.light-theme footer { background: #eae5d9 !important; color: #4c5041; border-color: var(--line); }
+.light-theme footer [class*="text-[#"] { color: #696a5c; }
+.light-theme footer h3 span { color: #6f5936; }
+.light-theme footer .border-white\/10 { border-color: var(--line); }
+.light-theme .motion-control { background: #fffdf4e8; color: #716042; border-color: #b8a37e66; box-shadow: 0 3px 15px #5744260a; }
+.light-theme .portfolio-ai-launcher { background: #343d2e !important; color: #f6eedc !important; border-color: #818b6f80; box-shadow: 0 10px 30px #30382d25 !important; }
+.light-theme .portfolio-ai-launcher__icon { color: #f6eedc; }
+.light-theme #portfolio-chat { background: #fbf8ef; border-color: #b8a37e66; box-shadow: 0 20px 60px #40372130; }
+.light-theme #portfolio-chat header { background: #e9e2d3; border-color: var(--line); }
+.light-theme #portfolio-chat header h2 { color: #333b2b; }
+.light-theme #portfolio-chat header p { color: #526340; }
+.light-theme #portfolio-chat header > div > span,
+.light-theme #portfolio-chat button[type=submit] { background: #343d2e; color: #f6eedc; box-shadow: none; }
+.light-theme #portfolio-chat .rounded-bl-md { background: #efeadf; color: #4e5144; border-color: var(--line); }
+.light-theme #portfolio-chat .rounded-br-md { background: #424d38; color: #faf7ed; box-shadow: none; }
+.light-theme #portfolio-chat .rounded-full { background: #eee7d7; color: #655232; border-color: #b8a37e66; }
+.light-theme #portfolio-chat input { background: #fffdf8; color: #30332b; border-color: #b8a37e66; }
+.light-theme #portfolio-chat form { border-color: var(--line); }
+/* Sunlit silk and bronze geometry replace the dark film lighting. */
+.light-theme .scene-light-primary { background: radial-gradient(ellipse, #c9aa6b50, #e7d8b82e 42%, transparent 70%); }
+.light-theme .scene-light-secondary { background: radial-gradient(ellipse, #899c7840, transparent 65%); }
+.light-theme .scene-ribbons { opacity: .85; }
+.light-theme .scene-ribbons i { border-color: #a58b5c45; box-shadow: 0 -24px 70px -25px #b8a47c55, inset 0 32px 60px -48px #fffdf9; }
+.light-theme .scene-orbits i { border-color: #9a805330; }
+.light-theme .scene-orbits i::after { background: #a78a50; box-shadow: 0 0 18px 4px #bd9c5d40; }
+.light-theme .scene-grid { background-image: linear-gradient(#95805c18 1px, transparent 1px), linear-gradient(90deg, #95805c18 1px, transparent 1px); }
+.light-theme .scene-chapter { color: #8e76454a; }
+.light-theme .scene-grain { mix-blend-mode: multiply; opacity: .07; }
+.light-theme .scene-horizon { background: linear-gradient(90deg, transparent, #9c7c45a0, transparent); }
+.light-theme #contact .scene-light-primary { background: radial-gradient(ellipse, #d1b3764a, transparent 65%); }
+@media (max-width: 767px) {
+  .light-theme .main-navigation { background: #f7f4ed; }
+  .light-theme .menu-toggle { color: #705936; border-color: #b8a37e66; }
+  .light-theme .hero-portrait { box-shadow: 13px 16px 0 -6px #e5ddce; }
+}
+/* Keep CTA labels legible against their dark olive surfaces. */
+.light-theme main #contact button[type="submit"],
+.light-theme main #projects article a:last-child { color: #fcfaf3 !important; }
+.light-theme main #contact input,
+.light-theme main #contact textarea { background: #fffdf7; color: #30332b; }

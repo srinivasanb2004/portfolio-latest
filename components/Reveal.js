@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 /**
  * Wraps content and animates it in (fade + slide up) the first time
@@ -13,13 +13,14 @@ export default function Reveal({
   className = '',
   once = true,
 }) {
+  const reduced = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduced ? false : { opacity: 0, y, filter: "blur(5px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once, amount: 0.2 }}
-      transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+      transition={{ duration: reduced ? 0 : 0.95, delay: reduced ? 0 : delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>

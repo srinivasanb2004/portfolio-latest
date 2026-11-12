@@ -1,11 +1,17 @@
+import TechInteractions from '@/components/TechInteractions';
+import InteractiveBackground from '@/components/InteractiveBackground';
 import './globals.css';
+import './light-theme.css';
+import './engineering.css';
+import './machine-theme.css';
+import './portfolio-lab.css';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from '@/components/Navbar';
 import ScrollProgress from '@/components/ScrollProgress';
-import InteractiveBackground from '@/components/InteractiveBackground';
 
-const siteUrl = 'https://portfolio-latest-mu-rose.vercel.app/'; 
+
+const siteUrl = 'https://portfolio-latest-mu-rose.vercel.app/';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -87,9 +93,11 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body className="bg-[#050816] text-white">
-        <InteractiveBackground />
+      <body className="portfolio-theme dark-theme">
+        <a href="#home" className="skip-link">Skip to content</a>
         <ScrollProgress />
+        <InteractiveBackground />
+        <TechInteractions />
         <Navbar />
         {children}
         <Analytics />
