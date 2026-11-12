@@ -76,7 +76,8 @@ export default function PortfolioChatbot() {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const container = messagesEndRef.current?.parentElement;
+    if (container) container.scrollTop = container.scrollHeight;
   }, [messages, isOpen]);
 
   function handleSubmit(event) {

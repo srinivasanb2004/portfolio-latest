@@ -21,6 +21,7 @@ export default function InteractiveBackground() {
     const context = canvas.getContext('2d');
     if (!context) return;
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const compact = window.matchMedia('(max-width: 767px), (pointer: coarse)');
     const sections = [...document.querySelectorAll('.cinematic-section')];
     const visible = new Set();
     let frame = 0;
@@ -40,6 +41,7 @@ export default function InteractiveBackground() {
     sections.forEach(section => observer.observe(section));
 
     function resize() {
+      if (compact.matches) { canvas.width = 1; canvas.height = 1; return; }
       width = window.innerWidth;
       height = window.innerHeight;
       const ratio = Math.min(window.devicePixelRatio || 1, width < 768 ? 1 : 1.5);
@@ -82,7 +84,7 @@ export default function InteractiveBackground() {
       setReduced(media.matches);
       const stopped = paused || media.matches || document.hidden;
       document.documentElement.dataset.motionPaused = String(stopped);
-      if (stopped) context.clearRect(0, 0, width, height);
+      if (stopped || compact.matches) context.clearRect(0, 0, width, height);
       else { previous = performance.now(); frame = requestAnimationFrame(draw); }
     }
     function move(event) {
@@ -92,6 +94,8 @@ export default function InteractiveBackground() {
     }
     resize();
     sync();
+    const modeChange = () => { resize(); sync(); };
+    compact.addEventListener('change', modeChange);
     window.addEventListener('resize', resize);
     window.addEventListener('pointermove', move, { passive: true });
     media.addEventListener('change', sync);
@@ -103,6 +107,7 @@ export default function InteractiveBackground() {
       window.removeEventListener('resize', resize);
       window.removeEventListener('pointermove', move);
       media.removeEventListener('change', sync);
+      compact.removeEventListener('change', modeChange);
       document.removeEventListener('visibilitychange', sync);
       delete document.documentElement.dataset.motionPaused;
     };

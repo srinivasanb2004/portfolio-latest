@@ -148,13 +148,17 @@ export default function ProjectsSection() {
                   {/* Icon Area */}
                   <div className="relative h-44 shrink-0 bg-gradient-to-br from-[#101110] to-[#1e293b] flex items-center justify-center overflow-hidden lg:h-auto lg:w-[44%]">
                     <div className="absolute inset-3 overflow-hidden rounded-2xl border border-white/10 bg-[#101110] shadow-2xl shadow-black/30">
+                      <div className="project-preview-fallback"><FaCode aria-hidden="true" /><span>{project.title}</span><small>Explore the live demo below</small></div>
                       <img
                         src={getDemoScreenshotUrl(project.demo)}
                         alt={`${project.title} demo preview`}
                         loading="lazy"
                         decoding="async"
+                        width={1200}
+                        height={760}
+                        onError={event => { event.currentTarget.style.display = 'none'; }}
                         referrerPolicy="no-referrer"
-                        className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                        className="relative h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
                       />
                     </div>
 

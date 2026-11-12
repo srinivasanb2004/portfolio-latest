@@ -52,3 +52,38 @@
 @media(max-width:900px){.terminal-layout{grid-template-columns:1fr;gap:32px}.terminal-intro{max-width:620px}}
 @media(max-width:480px){.terminal-layout{padding:0 18px}.terminal-titlebar{padding:16px 14px;gap:10px;font-size:10px}.terminal-log{padding:18px;height:280px}.terminal-prompt{padding:12px 14px;gap:8px}.terminal-prompt input{font-size:16px}.terminal-shortcuts{padding:14px}.terminal-ready{display:none}}
 @media(prefers-reduced-motion:reduce){.terminal-entry{animation:none}.terminal-shortcuts button{transition:none}}
+/* Phones use a stable, lightweight presentation instead of ambient machinery. */
+@media (max-width:767px), (pointer:coarse) {
+ html {scroll-behavior:auto!important}
+ .cinematic-dust,.cinematic-scene,.hero-orbit {display:none!important}
+ .cinematic-section {--scene-shift:0px!important;--pointer-x:0px!important;--pointer-y:0px!important}
+ .cinematic-section *, .cinematic-section *::before,.cinematic-section *::after {animation:none!important}
+ .portfolio-theme .content-reveal,.portfolio-theme .project-stack-card {opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+ .portfolio-theme .project-stack-card {position:relative!important;top:auto!important}
+ .portfolio-theme .site-header,.portfolio-theme [class*="backdrop-blur"],.portfolio-theme .motion-control,.portfolio-theme .command-dialog::backdrop {backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ .tech-surface::after {display:none!important}
+ .typed-letter>span {visibility:visible!important}
+ .has-typing-cursor::after {display:none!important}
+ .skills-marquee {overflow:auto;mask-image:none!important}
+ .skills-marquee__track {width:auto!important;transform:none!important}
+ .skills-marquee__group {flex-wrap:wrap;min-width:0!important;gap:12px!important}
+ .skills-marquee__group[aria-hidden=true] {display:none}
+ .architecture-node.selected {transform:none}
+ .portfolio-theme input,.portfolio-theme textarea,.portfolio-theme select {font-size:16px!important}
+ #portfolio-chat {height:min(29rem,calc(100dvh - 8rem));max-width:calc(100vw - 2.5rem)}
+ .portfolio-ai-launcher {width:52px!important;height:52px!important;transform:none!important}
+ .hero-machine,.hero-copy,.terminal-window,.case-console,.architecture-console {min-width:0;max-width:100%}
+ .hero-copy h1 {font-size:clamp(42px,11vw,72px);overflow-wrap:normal}
+ .terminal-log {overscroll-behavior-y:auto}
+ .terminal-entry,.case-layout,.architecture-body {opacity:1!important;transform:none!important}
+ .portfolio-theme .site-header {gap:8px;padding-inline:16px}
+ .wordmark {min-width:0}.wordmark small {letter-spacing:2px}
+ .command-trigger,.theme-toggle,.menu-toggle {flex-shrink:0}
+}
+.project-preview-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;text-align:center;color:#c9b38c;background:#101713;font:14px/1.5 monospace}.project-preview-fallback small{font-size:11px;color:#b9d3c1}
+@media(max-width:767px){.skills-marquee__group{padding-right:0!important;width:100%}.skills-marquee__item{font-size:13px;gap:8px}}
+@media(max-width:767px){
+ .portfolio-terminal .terminal-layout,.portfolio-lab .lab-shell {padding-inline:0}
+ .terminal-prompt {gap:6px;padding-inline:12px}
+ .terminal-prompt input {width:0}
+}

@@ -12,6 +12,7 @@ export default function TypedHeroHeading() {
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const compact = window.matchMedia('(max-width: 767px), (pointer: coarse)');
     let timer;
     let current = 0;
     function type() {
@@ -26,8 +27,8 @@ export default function TypedHeroHeading() {
     }
     function start() {
       clearTimeout(timer);
-      setReduced(media.matches);
-      if (media.matches) { current = text.length; setCount(current); }
+      setReduced(media.matches || compact.matches);
+      if (media.matches || compact.matches) { current = text.length; setCount(current); }
       else { current = 0; setCount(0); timer = setTimeout(type, 500); }
     }
     start();
@@ -36,7 +37,8 @@ export default function TypedHeroHeading() {
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-motion-paused'] });
     media.addEventListener('change', start);
-    return () => { clearTimeout(timer); observer.disconnect(); media.removeEventListener('change', start); };
+    compact.addEventListener('change', start);
+    return () => { clearTimeout(timer); observer.disconnect(); media.removeEventListener('change', start); compact.removeEventListener('change', start); };
   }, []);
 
   return <h1 className="typed-hero" aria-label="Beautiful interfaces. Powerful systems.">
